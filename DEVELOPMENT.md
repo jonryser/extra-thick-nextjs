@@ -1,70 +1,96 @@
-# Developing
+# Development
 
-# Prerequisites
+## Requirements
 
-1. [Node](https://nodejs.org/en/) `v16.13.0`.
-   > If you are using [nvm](https://github.com/nvm-sh/nvm), run `nvm use` to set a compatible version based on the project [.nvmrc](./.nvmrc)
-2. Yarn `npm i -g yarn`
+1. [Node](https://nodejs.org/en/) version 16.13.0
+   - This project is setup to use [asdf](https://github.com/asdf-vm/asdf). This allows installing a specific version for the project. To install nodejs with asdf, see [https://github.com/asdf-vm/asdf-nodejs](https://github.com/asdf-vm/asdf-nodejs)
+   - If using [nvm](https://github.com/nvm-sh/nvm), run `nvm use` to set a compatible version based on the project [.nvmrc](./.nvmrc)
+
+2. Yarn (for package management)
+   - This project is setup to use [asdf](https://github.com/asdf-vm/asdf). This allows installing a specific version for the project. To install yarn with asdf, see [https://github.com/twuni/asdf-yarn](https://github.com/twuni/asdf-yarn)
+   - Or install globally via npm: `npm i -g yarn`
+
 3. Docker ([Desktop](https://www.docker.com/products/docker-desktop/))
 
-# Getting Started
+4. PostgreSQL [https://www.postgresql.org/](https://www.postgresql.org/)
 
-### Fork this repository
+   - See [Running PostgreSQL in Docker](#running-postgresql-in-docker)
 
-It is optional, but recommended, to fork this repository instead of cloning in order to easily rebase as this project continues to improve.
+## Steps to start
 
-Clone your fork of this project and navigate to the containing directory.
+1. Create an env file
 
-### Create an env file
+   Create a file called `.env` in project's root directory. Copy the contents of [.env.template](.env.template)
 
-Create a file called `.env` in project's root directory. opy the contents of [.env.template](.env.template)
+   ```sh
+   cp .env.template .env
+   ```
 
-```sh
-cp .env.template .env
+2. Install dependencies by using yarn
+
+   ```sh
+   yarn
+   ```
+
+3. Initialize the DB
+
+   ```sh
+   yarn prisma:migrate:dev
+   ```
+
+   This will run the Prisma migrations found in [./prisma/migrations](./prisma/migrations) and seed the database from [./prisma/seedData/index.ts](./prisma/seedData/index.ts).
+
+4. Run the development server
+
+   ```sh
+   yarn dev
+   ```
+
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+   Log in with `test@email.com` and `testPassw0rd!`
+
+## Running PostgreSQL in Docker
+
+A simple way to get PostgreSQL running locally is to use Docker. Here is a simple Dockerized PostgreSQL server with pgAdmin:
+
+["postgres_docker" on Github](https://github.com/generalui/postgres_docker)
+
+### Linux ONLY
+
+If you are running on a Linux operating system the default connection to the docker container `host.docker.internal` will not work. To connect to the local dockerized PostgreSQL DB, ensure there is a `.env` file ([`.env.template`](./.env.template) can be used as a reference.) In the `.env` file, ensure the `DB_URL` variable has `host.docker.internal` replaced with `172.17.0.1`.
+
+```.env
+DB_URL="postgresql://postgres:docker@172.17.0.1:5432/my_db_dev?schema=public"
 ```
 
-### Install dependencies by using yarn
+### Connecting to a different Database
 
-```sh
-yarn
+Alternatively, the app may be set up to connect to the existing staging database or another database.
+
+To connect to a different database (ie staging), the `.env` file must also be used with values similar to:
+
+```.env
+DB_URL="postgresql://{get_the_database_user}:{get_the_database_password}@{get_the_database_host}:{get_the_database_port}/{get_the_database_name}?schema=public"
 ```
 
-### Start up the database container.
-
-While [Docker](https://docs.docker.com/get-docker/) is running execute the following command:
-
-```sh
-yarn run docker:db
-```
-
-This will build and compose a docker container with a PostgreSQL database. You will only need to run the `docker:db` command if the DB dies stops working between, which is not often.
-
-### Initialize the DB
-
-```sh
-yarn prisma:migrate:dev
-```
-
-This will run the Prisma migrations found in [./prisma/migrations](./prisma/migrations) and seed the database from [./prisma/seedData/index.ts](./prisma/seedData/index.ts).
-
-### Run the development server
-
-```sh
-yarn dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-Log in with `test@email.com` and `testPassw0rd!`
-
-# Testing
+## Testing
 
 1. setup testing: `npx playwright install`
 2. test: `yarn test`
 
 The development server must be running in order to execute playwright tests.
 
-# Development
+Unit tests written with Jest + @react-testing-library.
+Integration tests written in Playwright.
+
+``` sh
+yarn test       # Run all tests
+yarn test:unit  # Run unit tests
+yarn test:e2e   # Run integration tets
+```
+
+## General Development
 
 You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
@@ -72,31 +98,35 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Pre-commit tests
+## Pre-commit hooks
 
-This project uses husky to test code before changes are commited. This means that linting, unit, and e2e tests are run locally before changes can be commited by default. 
+This project uses husky to test code before changes are committed. This means that linting, unit, and e2e tests are run locally before changes can be committed by default.
 
-### Skipping pre-commit tests
+### Skipping pre-commit hooks
 
-Husky pre-commit scripts can be skipped by using the `--no-verify` flag, or the `-n` alias of the same flag. 
+Husky pre-commit scripts can be skipped by using the `--no-verify` flag, or the `-n` alias of the same flag.
 
-```
+``` sh
 git commit --no-verify -m "<conventional commit message>"
-or 
+```
+
+or
+
+``` sh
 git commit -n -m "<conventional commit message>"
 ```
 
 ## Commit message format
 
-Use the [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/) format when writing commit messages. See the [contributing guide](./CONTRIBUTING.md#commit-message-format) for more information. 
+Use the [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/) format when writing commit messages. See the [contributing guide](./CONTRIBUTING.md#commit-message-format) for more information.
 
-# Using this starter
+## Using this starter
 
 [NextJS](https://nextjs.org/) can be used to build Static React Apps that are deployed on a static CDN like an AWS S3 Bucket, github pages, or any static hosting provider. It can also be used as a full stack framework with a Node Express backend that serves server side rendered (SSR) react pages, that includes an API. This server implementation is optional. Static Generating is recommended for most client side only React apps.
 
 Nextjs can be removed entirely by removing the contents of the `./src` folder, `next.config.js` and `next-env.d.ts`. Then place whatever React implementation you prefer.
 
-# What's in the box?
+## What's in the box?
 
 - [x] [**Next.js**](https://nextjs.org/): Tried and tested React full-stack react framework.
 - [x] [**Typescript**](https://www.typescriptlang.org/): Configured and ready to go. With path aliases
@@ -114,37 +144,26 @@ Nextjs can be removed entirely by removing the contents of the `./src` folder, `
 - [x] [**Zod**](https://zod.dev): Validate and parse form inputs while keeping all types consistent. TypeScript-first schema validation with static type inference.
 - [x] [**Husky**](https://typicode.github.io/husky/#/): Prevent bad code from being pushed with pre-commit hooks already configured to lint and test before pushing local changes.
 
-## Testing
-
-Unit tests written with Jest + @react-testing-library.
-Integration tests written in Playwright.
-
-```
-yarn test       # Run all tests
-yarn test:unit  # Run unit tests
-yarn test:e2e   # Run integration tets
-```
-
-## Using Plop Templates
+### Using Plop Templates
 
 This project uses plop templates to generate consistent code that is flat and modular. Running `yarn plop` will allow you to generate a component (common, partial, or page), data model, or type.
-Plop will generate the appropriate code template in the appropriate folder. In the case of components plop will generate a folder with a nested component tsx, unit tests, types, and index for easier imports. In the case of pages, plop will generate the appropriate component in the `/pages` folder and `/components/pages`. 
+Plop will generate the appropriate code template in the appropriate folder. In the case of components plop will generate a folder with a nested component tsx, unit tests, types, and index for easier imports. In the case of pages, plop will generate the appropriate component in the `/pages` folder and `/components/pages`.
 
-```
+``` sh
 yarn plop
 ```
 
 You can also skip any part of the interactive menu by calling plop with the proper arguments.
 
-```
+``` sh
 yarn plop component common <commonComponent>
 ```
 
 [Learn more about using plop](https://plopjs.com/) for generating cleaner code
 
-# Learn More
+## Learn More
 
-## NextJS
+### NextJS
 
 To learn more about Next.js, take a look at the following resources:
 
@@ -153,7 +172,7 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-### Using this starter as static react app:
+### Using this starter as static react app
 
 A static react app generated at build time and hosted as client side only. All static content is pre-rendered on the page.
 
@@ -171,15 +190,15 @@ server-side generate pages, host api logic, and optimize page loading. This is o
 - See [api routes](https://nextjs.org/docs/api-routes/introduction)
 - See [next/server](https://nextjs.org/docs/api-reference/next/server)
 
-## State Management
+### State Management
 
-This project uses [ReactQuery](https://react-query-v3.tanstack.com/) for 99% of the state management. All api queries should be wrapped in hook with the relative model, with a reference to react query. 
+This project uses [ReactQuery](https://react-query-v3.tanstack.com/) for 99% of the state management. All api queries should be wrapped in hook with the relative model, with a reference to react query.
 
 [Hooks for redux](https://github.com/generalui/hooks-for-redux) is used for client side only state management. Currently this is only be used by the Multi-Step Form and may be removed in the future.
 
-# Project Source Code Map
+## Project Source Code Map
 
-```
+``` txt
 app
 ├── __tests__
 │   ├── __mocks__    // mock functions
@@ -202,7 +221,7 @@ app
 │   ├── components
 │   │   ├── common      // simple components with no state management
 │   │       │           // the building blocks for partials and pages
-│   │   |   └── <Component>      // Component folder   
+│   │   |   └── <Component>      // Component folder
 │   │   |       ├── <Component>.spec.ts      // unit test for component
 │   │   |       ├── <Component>.tsx          // component JSX markup
 │   │   |       ├── <Component>.types.tsx    // types used by the component
@@ -213,14 +232,14 @@ app
 │   │   └── pages       // contains jsx mark up for pages.
 │   │       │           // composed of partials and common components
 │   │       └── <Component>      // shares the same component folder structure as common
-│   ├── models       
+│   ├── models
 │   │   └── <Model>  
 │   │       ├── includes
 │   │       │   └── index.ts // contains json objects to be used for prisma includes
 │   │       ├── mutation
-│   │       │   └── <action><Model>[By<Field>].ts  // create | update | delete actions for model optionally specified field 
+│   │       │   └── <action><Model>[By<Field>].ts  // create | update | delete actions for model optionally specified field
 │   │       ├── query
-│   │       │   └── get<Model>[By<Field>].ts       // read actions for model optionally specified field 
+│   │       │   └── get<Model>[By<Field>].ts       // read actions for model optionally specified field
 │   │       └── <Model>.types.ts                   // model specific type references for prisma and zod validation
 │   ├── pages        // components in this folder are converted to page routes
 │   │   ├── api      // used for server routes if using NextJS fullstack.

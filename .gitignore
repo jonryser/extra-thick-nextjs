@@ -9,6 +9,9 @@
 /coverage
 /playwright-report/
 
+# yarn
+.yarn*
+
 # next.js
 /.next/
 /out/
