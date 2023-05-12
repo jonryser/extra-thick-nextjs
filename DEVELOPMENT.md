@@ -20,7 +20,7 @@
 
 1. Create an env file
 
-   Create a file called `.env` in project's root directory. Copy the contents of [.env.template](.env.template)
+   Create a file called `.env` in project's root directory. Copy the contents of [.env.template](.env.template). See more on [Environment Variables](#environment-variables).
 
    ```sh
    cp .env.template .env
@@ -40,7 +40,17 @@
 
    This will run the Prisma migrations found in [./prisma/migrations](./prisma/migrations) and seed the database from [./prisma/seedData/index.ts](./prisma/seedData/index.ts).
 
-4. Run the development server
+4. Set up Husky
+
+   Run `yarn prepare`
+
+5. Run the development server.
+
+   - Read about starting the app [Dockerized](./DEV_DOCKERIZED.md).
+
+   - Read about starting the app [Non-Dockerized](./DEV_NON_DOCKERIZED.md).
+
+   The app is started with the `dev` script from [`package.json`](./package.json)
 
    ```sh
    yarn dev
@@ -97,6 +107,24 @@ You can start editing the page by modifying `pages/index.js`. The page auto-upda
 [API routes](https://nextjs.org/docs/api-routes/introduction).
 
 The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+
+## Environment Variables
+
+All the environment variables used by the app have defaults. To set the environment variables, simply run the following bash script from the root of the [`project folder`](./):
+
+```bash
+bash ./set_env_variables.sh
+```
+
+The default environment variables' values may be over-written by adding the value to a `.env` file in the root of the [`project folder`](./). This file is not versioned in the repository.
+
+The [`.env.template`](./.env.template) file is an example of what the `.env` could be like and may be used as a reference.
+
+To reset the environment variables to the defaults (still using the values in the `.env` file), run the following bash script in the root of the [`project folder`](./):
+
+```bash
+bash ./reset_env_variables.sh
+```
 
 ## Pre-commit hooks
 
