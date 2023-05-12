@@ -1,4 +1,4 @@
-# Make the Node version into a variable so that it may be updated easily if / when needed. (ie "16.3.0")
+# Make the Node version into a variable so that it may be updated easily if / when needed. (ie "20.1.0")
 ARG nodeVersion
 
 # Using a node image itself so the app may be started and stoped more directly.

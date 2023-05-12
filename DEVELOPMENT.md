@@ -2,7 +2,7 @@
 
 ## Requirements
 
-1. [Node](https://nodejs.org/en/) version 16.13.0
+1. [Node](https://nodejs.org/en/) version 20.1.0
    - This project is setup to use [asdf](https://github.com/asdf-vm/asdf). This allows installing a specific version for the project. To install nodejs with asdf, see [https://github.com/asdf-vm/asdf-nodejs](https://github.com/asdf-vm/asdf-nodejs)
    - If using [nvm](https://github.com/nvm-sh/nvm), run `nvm use` to set a compatible version based on the project [.nvmrc](./.nvmrc)
 

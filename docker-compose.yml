@@ -18,7 +18,7 @@ services:
       context: ./
       dockerfile: Dockerfile
       args:
-        nodeVersion: ${NODE_VERSION:-16.13.0}
+        nodeVersion: ${NODE_VERSION:-20.1.0}
     container_name: ${CONTAINER_NAME:-extra_thick}
     image: ${IMAGE_NAME:-${CONTAINER_NAME:-extra_thick}}:${IMAGE_TAG:-dev}
     command:
