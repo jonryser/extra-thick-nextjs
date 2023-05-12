@@ -15,6 +15,8 @@ NC='\033[0m'
 # By default, set these variables to false.
 build=false
 docker=false
+install=false
+migrate=false
 no_auto_start=false
 reset=false
 
@@ -42,6 +44,20 @@ if has_param '-b' "$@" || has_param '--build' "$@"
 then
     >&2 echo -e "${BLUE}Build requested${NC}"
     build=true
+fi
+
+# If the `-i or --install` flag is passed, set install to true.
+if has_param '-i' "$@" || has_param '--install' "$@"
+then
+    >&2 echo -e "${BLUE}Install dependencies requested${NC}"
+    install=true
+fi
+
+# If the `-m or --migrate` flag is passed, set migrate to true.
+if has_param '-m' "$@" || has_param '--migrate' "$@"
+then
+    >&2 echo -e "${BLUE}Migrate dependencies requested${NC}"
+    migrate=true
 fi
 
 # If the `-n or --no_auto_start` flag is passed, set no_auto_start to true.
@@ -87,10 +103,17 @@ then
     # Start the container.
     docker compose up -d
 else
-    # Install dependencies.
-    yarn
-    # Run migrations.
-    yarn prisma:migrate:dev
+    if [ "${install}" = true ]
+    then
+        # Install dependencies.
+        yarn
+    fi
+
+    if [ "${migrate}" = true ]
+    then
+        # Run migrations.
+        yarn prisma:migrate:dev
+    fi
 
     if [ -z ${NO_AUTO_START} ]
     then
@@ -148,8 +171,8 @@ then
             wait $progress_pid 2>/dev/null
             # Cursor visible again.
             tput cnorm
-            >&2 echo -e "${GREEN}The app is up at ${SERVER_PROTOCAL}://${SERVER_DOMAIN}:${SERVER_PORT}${API_ROOT}${NC}"
-            url=${SERVER_PROTOCAL}://${SERVER_DOMAIN}:${SERVER_PORT}${API_ROOT}
+            >&2 echo -e "${GREEN}The app is up at ${SERVER_PROTOCOL}://${SERVER_DOMAIN}:${SERVER_PORT}${API_ROOT}${NC}"
+            url=${SERVER_PROTOCOL}://${SERVER_DOMAIN}:${SERVER_PORT}${API_ROOT}
             open_url
         elif [[ ${iterator} -eq ${max_num_tries} ]]
         then
@@ -179,6 +202,10 @@ then
 elif [ "${docker}" = true ]
 then
     >&2 echo -e "${GREEN}The app container is built and running.\n- The app has not been started; it must be started manually.\n- Please see the README.md for more information.${NC}"
+elif [ ! -z "$NO_AUTO_START" ]
+then
+    >&2 echo -e "${GREEN}The app has not been started.${NC}"
+    >&2 echo -e "${YELLOW}The 'NO_AUTO_START' environment variable is set and must be unset to start the app moving forward.${NC}"
 else
     >&2 echo -e "${GREEN}The app has been stopped.${NC}"
 fi
