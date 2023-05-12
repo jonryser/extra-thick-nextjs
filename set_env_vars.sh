@@ -34,11 +34,11 @@ function dotenv() {
 dotenv
 
 # If environment variables are set, use them. If not, use the defaults.
-# Only need defaults for `API_ROOT`, `DOT_ENV_FILE`, `SERVER_DOMAIN`, `SERVER_PORT`, and `SERVER_PROTOCAL` as they are used in the scripts.
+# Only need defaults for `API_ROOT`, `DOT_ENV_FILE`, `SERVER_DOMAIN`, `SERVER_PORT`, and `SERVER_PROTOCOL` as they are used in the scripts.
 # All other defaults are set in the `docker-compose.yml` file.
 export API_ROOT=${API_ROOT:-/api}
 export DOT_ENV_FILE=${DOT_ENV_FILE:-}
 export SERVER_DOMAIN=${SERVER_DOMAIN:-localhost}
 export SERVER_PORT=${SERVER_PORT:-3000}
-export SERVER_PROTOCAL=${SERVER_PROTOCAL:-http}
+export SERVER_PROTOCOL=${SERVER_PROTOCOL:-http}
 >&2 echo -e "${GREEN}* Default environment variables set that weren't overridden in the ${DOT_ENV} file or from the command line.${NC}"

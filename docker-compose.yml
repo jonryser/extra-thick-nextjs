@@ -7,7 +7,7 @@ services:
     # Ensure specific environment variables are ALWAYS available.
     environment:
       # Server
-      - BASE_URL=${BASE_URL:-${SERVER_PROTOCAL:-http}://${SERVER_DOMAIN:-localhost}:${SERVER_PORT:-3000}}
+      - BASE_URL=${BASE_URL:-${SERVER_PROTOCOL:-http}://${SERVER_DOMAIN:-localhost}:${SERVER_PORT:-3000}}
       - DB_URL=${DB_URL:-postgresql://postgres:docker@host.docker.internal:5432/my_db_dev?schema=public&connect_timeout=300}
       - NEXT_PUBLIC_ENV=${NEXT_PUBLIC_ENV:-development}
       - NEXT_SHARP_PATH=${NEXT_SHARP_PATH:-/app/node_modules/sharp}
