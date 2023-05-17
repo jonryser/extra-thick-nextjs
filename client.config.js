@@ -1,17 +1,15 @@
 module.exports = {
-	name: 'GenUI',
+	name: 'Extra Thick',
 	defaultMetaTitle: 'GenUI',
 	headerLogo: '/images/genui_logo.svg',
 	signInImage: '/images/genui_logo.svg',
 	favicon: '/images/genui_logo.svg',
 	about: {
-		title: 'GenUI React Development Kit',
+		title: 'Extra Thick Northwest Afrobeat',
 		image: '/images/fist_bump.jpg',
 		imageAlt: 'Fist bump',
 		description:
-			'This project template was engineered to get your GenUI project up and running in no time!',
-		link: 'https://github.com/generalui/react-nextjs-boilerplate',
-		linkLabel: 'Read the readme'
+			`Built upon a rich legacy of deep grooves and sweaty dance floors, EXTRA THICK is the evolution of Afrobeat from the Pacific Northwest.\n6 (and a half) of the original 8 members of Cascadia'10 and decided to regroup and become double in size… to become extra… to become thick… they decided to become…\n\nEXTRA THICK!`,
 	},
 	backgroundColor: 'rgba(0, 0, 0, 0.039)',
 	tailwindTheme: {
