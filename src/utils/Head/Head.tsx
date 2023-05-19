@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 // Constants.
 import {
 	DNS_PREFETCH,
@@ -49,9 +49,9 @@ export function getLinks(
 				props = { ...props, ...{ [LinkAttr.as]: asValue } }
 			}
 			finalLinkTags.push(
-				<React.Fragment key={`${LINK_KEY_PREFIX}${key}${index}`}>
+				<Fragment key={`${LINK_KEY_PREFIX}${key}${index}`}>
 					<link {...props} />
-				</React.Fragment>
+				</Fragment>
 			)
 		}
 	})
@@ -89,9 +89,9 @@ export function getLinkTags(
 						props.href || ``
 					)}${index}`
 					linkArray.push(
-						<React.Fragment key={`${LINK_KEY_PREFIX}${key}`}>
+						<Fragment key={`${LINK_KEY_PREFIX}${key}`}>
 							<link {...props} />
-						</React.Fragment>
+						</Fragment>
 					)
 				}
 			}
@@ -135,10 +135,10 @@ export function getMetaTags(
 						: index
 				}`
 				metaTags.push(
-					<React.Fragment key={`${LINK_KEY_PREFIX}${index}`}>
+					<Fragment key={`${LINK_KEY_PREFIX}${index}`}>
 						<meta {...props} />
 						{'\n'}
-					</React.Fragment>
+					</Fragment>
 				)
 			}
 		}
@@ -160,12 +160,12 @@ export function getScripts(pageRoot: string, scripts = [] as ScriptTags[]): JSX.
 						const currentScript: ScriptData = scriptTag[script]
 						if (script === 'inline' && currentScript[ScriptAttr.type] && currentScript.value) {
 							accumulator.push(
-								<React.Fragment key={`${DEFAULT_SCRIPT_KEY_PREFIX}${index}`}>
+								<Fragment key={`${DEFAULT_SCRIPT_KEY_PREFIX}${index}`}>
 									<script
 										type={currentScript[ScriptAttr.type]}
 										dangerouslySetInnerHTML={{ __html: currentScript.value }}
 									/>
-								</React.Fragment>
+								</Fragment>
 							)
 							return accumulator
 						}
@@ -179,9 +179,9 @@ export function getScripts(pageRoot: string, scripts = [] as ScriptTags[]): JSX.
 							props[ScriptAttr.defer] = currentScript[ScriptAttr.defer]
 						}
 						accumulator.push(
-							<React.Fragment key={`${DEFAULT_SCRIPT_KEY_PREFIX}${index}`}>
+							<Fragment key={`${DEFAULT_SCRIPT_KEY_PREFIX}${index}`}>
 								<script {...props} />
-							</React.Fragment>
+							</Fragment>
 						)
 						return accumulator
 					}
@@ -263,9 +263,9 @@ export function getStyles(styles = [] as string[], defaultStyles = [] as string[
 export function getTitleTag(title = ''): JSX.Element {
 	if (!title) return <></>
 	return (
-		<React.Fragment>
+		<Fragment>
 			<title>{title}</title>
 			{'\n'}
-		</React.Fragment>
+		</Fragment>
 	)
 }

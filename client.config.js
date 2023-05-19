@@ -1,6 +1,6 @@
 module.exports = {
 	name: 'Extra Thick',
-	defaultMetaTitle: 'GenUI',
+	defaultMetaTitle: 'Extra Thick',
 	headerLogo: '/images/genui_logo.svg',
 	signInImage: '/images/genui_logo.svg',
 	favicon: '/images/genui_logo.svg',

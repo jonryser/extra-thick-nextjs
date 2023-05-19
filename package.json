@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "build:css": "yarn tailwindcss -i",
+    "build:css": "yarn tailwindcss -i ./src/styles/global.scss -o ./public/styles/output.css --watch",
     "build:static": "next build && next export",
     "build:analyze": "ANALYZE=true yarn build",
     "dev": "next dev",
@@ -26,7 +26,8 @@
     "test:e2e:create": "dotenv cross-var playwright codegen '%SERVER_DOMAIN%:%SERVER_PORT%'",
     "test:e2e": "playwright test",
     "test:integration": "jest --verbose --passWithNoTests ./integration",
-    "test:unit": "jest --verbose"
+    "test:unit": "jest --verbose",
+    "test:unit:watch": "jest --verbose --watchAll"
   },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
