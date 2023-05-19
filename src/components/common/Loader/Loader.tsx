@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import React, { useEffect, useState } from 'react'
+import { cloneElement, isValidElement, useEffect, useState } from 'react'
 import { CommonProps } from 'types/CommonProps'
 import { Spinner } from 'common/Spinner'
 import { LoaderProps } from './Loader.types'
@@ -33,8 +33,8 @@ export const Loader = ({
 	return (
 		<>
 			{isLoading && showLoading
-				? React.isValidElement(fallback)
-					? React.cloneElement(fallback, { className: fallbackClassName })
+				? isValidElement(fallback)
+					? cloneElement(fallback, { className: fallbackClassName })
 					: fallback
 				: children}
 		</>

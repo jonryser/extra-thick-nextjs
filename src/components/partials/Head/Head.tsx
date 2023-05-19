@@ -1,5 +1,5 @@
 import NextHead from 'next/head'
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getLinkTags, getMetaTags, getScriptTags, getStyles, getTitleTag } from 'utils/Head'
 // Components.
 import HeadProps, { HeadData, PageTags } from './HeadProps'

@@ -1,6 +1,5 @@
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
-import React from 'react'
 // Components.
 import Head from './Head'
 

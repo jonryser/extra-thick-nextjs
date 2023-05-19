@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import React from 'react'
+import { forwardRef } from 'react'
 import { TextProps } from './Text.types'
 import { textVariants } from './variants'
 
@@ -8,7 +8,7 @@ import { textVariants } from './variants'
  *
  * V stands for variant. Sorry, I'm lazy. :(
  */
-export const Text = React.forwardRef<HTMLAnchorElement, TextProps>(function Text(
+export const Text = forwardRef<HTMLAnchorElement, TextProps>(function Text(
 	{ children, className, href, onClick, testId = 'Text', v = 'default', size }: TextProps,
 	ref
 ) {
