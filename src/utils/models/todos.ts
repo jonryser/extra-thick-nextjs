@@ -1,5 +1,5 @@
 import { TodoDataType, TodoStatus } from '@prisma/client'
-import { uniqueId } from 'lodash'
+import uniqueId from 'lodash/uniqueId'
 import { Session } from 'next-auth'
 import { ApiTodo, OptimisticTodo, Todo, TodoInput, TodoInputMap, todoInputMap } from 'types/Todo'
 

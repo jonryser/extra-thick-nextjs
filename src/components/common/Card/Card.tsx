@@ -18,7 +18,7 @@ export const Card = ({
 	<div data-testid={testId} className={cn('bg-white p-4 rounded-lg', className)}>
 		{img && (
 			<figure className='w-full lg:w-1/4 relative h-60 lg:h-48'>
-				<Image layout='fill' src={img} alt={imgAlt} />
+				<Image layout='fill' src={img} alt={imgAlt || ''} />
 			</figure>
 		)}
 		{(title || action || iconProps) && (

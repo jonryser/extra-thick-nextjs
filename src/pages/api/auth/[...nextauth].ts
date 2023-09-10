@@ -102,7 +102,7 @@ export default NextAuth({
 			if (account) {
 				token.id = account.providerAccountId
 				token.error = account.error
-				token.role = user?.role
+				token.role = (user as User)?.role
 			}
 
 			return token
@@ -110,9 +110,9 @@ export default NextAuth({
 		async session({ session, token }) {
 			// Send properties to the client, like an access_token from a provider.
 			if (token) {
-				session.userId = token.id
-				session.error = token.error
-				session.role = token.role
+				session.userId = token.id as string
+				session.error = token.error as string
+				session.role = token.role as string
 			}
 			return session
 		}

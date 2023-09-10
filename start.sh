@@ -13,6 +13,7 @@ RED="\033[1;31m"
 NC='\033[0m'
 
 # By default, set these variables to false.
+analyze=false
 build=false
 docker=false
 install=false
@@ -74,6 +75,13 @@ then
     reset=true
 fi
 
+# If the `-a or --analyze` flag is passed, set analyze to true.
+if has_param '-a' "$@" || has_param '--analyze' "$@"
+then
+    >&2 echo -e "${BLUE}Analyze bundle requested${NC}"
+    analyze=true
+fi
+
 if [ "${reset}" = true ]
 then
     # Reset the environment variables.
@@ -97,11 +105,11 @@ fi
 if [ "${build}" = true ]
 then
     # Build and start the container.
-    docker compose up -d --build
+    docker compose up -d --build web-app
 elif [ "${docker}" = true ]
 then
     # Start the container.
-    docker compose up -d
+    docker compose up -d web-app
 else
     if [ "${install}" = true ]
     then
@@ -117,8 +125,14 @@ else
 
     if [ -z ${NO_AUTO_START} ]
     then
-        # Start the app.
-        yarn dev
+        if [ "${analyze}" = true ]
+        then
+            # Start the app.
+            ANALYZE=true yarn build
+        else
+            # Start the app.
+            yarn dev
+        fi
     fi
 fi
 

@@ -1,5 +1,5 @@
 import cn from 'classnames'
-import { get } from 'lodash'
+import get from 'lodash/get'
 import { ListData } from 'partials/List/List.types'
 import { ListItemProps } from './ListItem.types'
 

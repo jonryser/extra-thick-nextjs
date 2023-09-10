@@ -11,8 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.target_branch.outputs.branch }}
+      changed_deps: ${{ steps.changed-deps.outputs.any_changed }}
       env_name: ${{ steps.environment.outputs.name }}
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
       - name: Get target branch
         run: |
           branch=${{ github.event.pull_request.base.ref }}
@@ -36,6 +42,41 @@ jobs:
           echo 'environment: '${env}
           echo "::endgroup::"
         id: environment
+
+      - name: Get changed dependency files
+        id: changed-deps
+        uses: tj-actions/changed-files@v36
+        with:
+          files: |
+            package.json
+            yarn.lock
+
+      - name: Run step if any file(s) in the docs folder change
+        if: steps.changed-deps.outputs.any_changed == 'true'
+        run: echo "name=${env}" >> $GITHUB_OUTPUT
+
+  # build_dep_image:
+  #   name: Build dependency image
+  #   needs: [info]
+  #   if: needs.info.outputs.changed_deps == 'true'
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v3
+  #       with:
+  #         fetch-depth: 0
+
+  #     - name: Build and push Docker image
+  #       env:
+  #         CI_PROJECT_NAME: "${{ github.repository }}/${{ github.event.pull_request.head.ref }}"
+  #         CONTAINER_NAME: "${{ env.CI_REGISTRY_IMAGE }}:deps"
+  #         LATEST_NAME: "${{ env.CI_REGISTRY_IMAGE }}:deps-${{ needs.info.outputs.branch }}-latest"
+  #       run: |
+  #         docker compose build deps;
+  #         sudo docker build --build-arg R_VERSION=${R_VERSION} --cache-from ${LATEST_NAME} --tag ${CONTAINER_NAME} --tag ${LATEST_NAME} .
+  #         sudo docker login ghcr.io -u ${{ github.actor }} -p ${{ secrets.GITHUB_TOKEN }}
+  #         sudo docker push ${CONTAINER_NAME}
+  #         sudo docker push $LATEST_NAME;
 
   test:
     name: Lint and test

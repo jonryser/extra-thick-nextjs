@@ -102,6 +102,8 @@ export const DocumentsInput = ({
 				{({ input, meta }) => {
 					inputRef.current = input
 					const isError = meta.error && meta.touched
+					const imageWidth = parseInt(!('icon' in image) ? image?.width : '')
+					const imageHeight = parseInt(!('icon' in image) ? image?.height : '')
 
 					return (
 						<>
@@ -126,8 +128,8 @@ export const DocumentsInput = ({
 										) : (
 											<Image
 												src={image.src}
-												width={image.width}
-												height={image.height}
+												width={imageWidth}
+												height={imageHeight}
 												alt={t('alt')}
 											/>
 										)}

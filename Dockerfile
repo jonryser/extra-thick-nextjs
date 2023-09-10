@@ -6,48 +6,38 @@ FROM node:${nodeVersion} AS deps
 
 WORKDIR /app
 
-# Install dependencies based on the preferred package manager
-COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
+COPY package.json yarn.lock* .yarnrc.yml ./
+COPY .yarn ./.yarn
 
 # Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
 # RUN apt-get install -y libc6-compat
-RUN apt-get update && \
-    apt-get -qy install openssl && \
-    yarn
+RUN apt-get update && apt-get -qy install openssl
+RUN yarn --frozen-lockfile
 
 # Rebuild the source code only when needed
 FROM deps AS builder
 
 WORKDIR /app
 
-COPY . .
-
 RUN yarn prisma:generate && \
     yarn build
+
+COPY . .
 
 # Production image, copy all the files and run next
 FROM node:${nodeVersion} AS runner
 
 WORKDIR /app
 
-# Next.js collects completely anonymous telemetry data about general usage.
-# Learn more here: https://nextjs.org/telemetry
-# Uncomment the following line in case you want to disable telemetry during runtime.
-# ENV NEXT_TELEMETRY_DISABLED 1
-
 RUN addgroup --system --gid 1001 nodejs && \
     adduser --system --uid 1001 nextjs
 
-COPY --from=builder /app/public ./public
-
 # Automatically leverage output traces to reduce image size
 # https://nextjs.org/docs/advanced-features/output-file-tracing
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/server.js /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
-COPY --from=builder /app/prisma ./prisma
-
-# copy, for example,  .env.production.local
-COPY --chown=nextjs:nodejs .env.* .
+COPY --from=builder --chown=nextjs:nodejs /app/.env .
 
 USER nextjs
 

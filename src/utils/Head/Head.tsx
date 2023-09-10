@@ -132,10 +132,10 @@ export function getMetaTags(
 						? props[MetaAttr.httpEquiv]
 						: props[MetaAttr.charSet]
 						? props[MetaAttr.charSet]
-						: index
+						: ''
 				}`
 				metaTags.push(
-					<Fragment key={`${LINK_KEY_PREFIX}${index}`}>
+					<Fragment key={`${LINK_KEY_PREFIX}${key}${index}`}>
 						<meta {...props} />
 						{'\n'}
 					</Fragment>

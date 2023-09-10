@@ -9,7 +9,7 @@
  * - https://nextjs.org/docs/advanced-features/i18n-routing
  */
 import { dictionary } from 'dictionary/index'
-import { get } from 'lodash'
+import get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { useMemo } from 'react'
 

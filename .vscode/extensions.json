@@ -1,14 +1,14 @@
 {
 	"recommendations": [
+		"bierner.markdown-preview-github-styles",
+		"DavidAnson.vscode-markdownlint",
 		"dbaeumer.vscode-eslint",
 		"esbenp.prettier-vscode",
-		"streetsidesoftware.code-spell-checker",
 		"Gruntfuggly.todo-tree",
 		"eamodio.gitlens",
 		"mikestead.dotenv",
-		"xabikos.JavaScriptSnippets",
-		"dsznajder.es7-react-js-snippets",
-		"yzhang.markdown-all-in-one",
-		"ChakrounAnas.turbo-console-log"
+		"Prisma.prisma",
+		"socheatsok78-lab.dotenv-vscode-stripped",
+		"streetsidesoftware.code-spell-checker"
 	]
 }
