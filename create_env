@@ -1,0 +1,42 @@
+#!/bin/bash
+
+# Defined some useful colors for echo outputs.
+# Use Green for a successful action.
+GREEN="\033[0;32m"
+# No Color (used to stop or reset a color).
+NC='\033[0m'
+
+env_file=.env
+cloudinary_enabled=$(if [ "$EMAIL_SENDING_IS_ENABLED" = "true" ]; then echo true; elif [[ -z "$SENDGRID_API_KEY" || -z "$SENDGRID_EMAIL_SENDER" ]]; then echo false; else echo true; fi)
+sendgrid_enabled=$(if [ "$EMAIL_SENDING_IS_ENABLED" = "true" ]; then echo true; elif [[ -z "$SENDGRID_API_KEY" || -z "$SENDGRID_EMAIL_SENDER" ]]; then echo false; else echo true; fi)
+
+# Empty the contents of the file
+> $env_file
+# Write contents to the file
+echo -e "SERVER_NAME=${SERVER_NAME}" >> $env_file
+echo -e "BASE_URL=https://${SERVER_NAME}" >> $env_file
+echo -e "APP_BASE_URL=$(if [ -z "$APP_BASE_URL" ]; then echo '${BASE_URL}'; else echo $APP_BASE_URL; fi)" >> $env_file
+echo -e "NODE_ENV=production" >> $env_file
+echo -e "NEXT_PUBLIC_API_URL=\${APP_BASE_URL}/api" >> $env_file
+echo -e "NEXT_PUBLIC_BASE_URL=\${APP_BASE_URL}" >> $env_file
+echo -e "NEXT_PUBLIC_ENV=\${NODE_ENV}" >> $env_file
+echo -e "NEXTAUTH_URL=\${APP_BASE_URL}" >> $env_file
+echo -e "NEXTAUTH_URL_INTERNAL=\${APP_BASE_URL}" >> $env_file
+echo -e "CLOUD_FOLDER_NAME=$(if [ -z "$CLOUD_NAME" ]; then echo documents; else echo $CLOUD_NAME; fi)" >> $env_file
+echo -e "CLOUD_NAME=$(if [ -z "$CLOUD_NAME" ]; then echo \"...\"; else echo $CLOUD_NAME; fi)" >> $env_file
+echo -e "CLOUDINARY_API_KEY=$(if [ -z "$CLOUDINARY_API_KEY" ]; then echo \"...\"; else echo $CLOUDINARY_API_KEY; fi)" >> $env_file
+echo -e "CLOUDINARY_API_SECRET=$(if [ -z "$CLOUDINARY_API_SECRET" ]; then echo \"...\"; else echo $CLOUDINARY_API_SECRET; fi)" >> $env_file
+echo -e "CLOUDINARY_ENABLED=$(if [ "$CLOUDINARY_ENABLED" = "true" ]; then echo true; elif [[ "$CLOUDINARY_ENABLED" = "false" || -z "$CLOUD_NAME" || -z "$CLOUD_FOLDER_NAME" || -z "$CLOUDINARY_API_KEY" || -z "$CLOUDINARY_API_SECRET" ]]; then echo false; else echo true; fi)" >> $env_file
+echo -e "HOSTNAME=\${SERVER_NAME}" >> $env_file
+echo -e "DB_HOST=${DB_HOST}" >> $env_file
+echo -e "DB_NAME=${DB_NAME}" >> $env_file
+echo -e "DB_PASS=${DB_PASS}" >> $env_file
+echo -e "DB_PORT=3306" >> $env_file
+echo -e "DB_USER=${DB_USER}" >> $env_file
+echo -e "NEXT_PUBLIC_CLOUDINARY_ENABLED=\${CLOUDINARY_ENABLED}" >> $env_file
+echo -e "NEXTAUTH_SECRET=${NEXTAUTH_SECRET}" >> $env_file
+echo -e "EMAIL_SENDING_IS_ENABLED=$(if [ "$EMAIL_SENDING_IS_ENABLED" = "true" ]; then echo true; elif [[ "$EMAIL_SENDING_IS_ENABLED" = "false" || -z "$SENDGRID_API_KEY" || -z "$SENDGRID_EMAIL_SENDER" ]]; then echo false; else echo true; fi)" >> $env_file
+echo -e "SENDGRID_API_KEY=$(if [ -z "$SENDGRID_API_KEY" ]; then echo \"...\"; else echo $SENDGRID_API_KEY; fi)" >> $env_file
+echo -e "SENDGRID_EMAIL_SENDER=$(if [ -z "$SENDGRID_EMAIL_SENDER" ]; then echo \"...\"; else echo $SENDGRID_EMAIL_SENDER; fi)" >> $env_file
+
+>&2 echo -e "${GREEN}${env_file} created${NC}"
