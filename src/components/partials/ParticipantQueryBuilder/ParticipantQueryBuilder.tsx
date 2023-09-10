@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { SingleParticipantQueryResult } from 'types/Participants'
+import { ParticipantQueryResults, SingleParticipantQueryResult } from 'types/Participants'
 import { Filter, OptionType, QueryBuilderModel } from 'types/QueryBuilder'
 import { formatDisplayDate } from 'utils/client/date'
 import { useParticipantQuery } from 'hooks/api/queryBuilder/useParticipantQuery'

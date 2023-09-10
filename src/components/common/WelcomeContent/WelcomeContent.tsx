@@ -1,14 +1,10 @@
 import cn from 'classnames'
 import { about } from 'client.config'
 import Image from 'next/image'
+import { AboutConfig } from 'types/Config'
 import { useText } from 'hooks/useText'
 import { Button } from 'common/Button'
 import { WelcomeContentProps } from './WelcomeContent.types'
-
-interface AboutConfig {
-	image: string
-	link?: string
-}
 
 export const WelcomeContent = ({
 	className,

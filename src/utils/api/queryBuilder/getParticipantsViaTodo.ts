@@ -1,5 +1,5 @@
 import { GetParticipantsViaTodo } from 'types/ParticipantQueryBuilder'
-import { WhereStatementWithFilterType } from 'types/QueryBuilder'
+import { WhereStatement, WhereStatementWithFilterType } from 'types/QueryBuilder'
 import { ParticipantQueryBuilderTodoPayload } from 'types/Todo'
 import { prisma } from 'utils/api/prisma'
 import { getTodoParticipantIdsAndCount } from 'utils/api/queryBuilder/getTodoParticipantIdsAndCount'
@@ -17,7 +17,7 @@ export const getParticipantsViaTodo: GetParticipantsViaTodo = async (
 		('OR' in participantWhere.where || 'AND' in participantWhere.where)
 	) {
 		// TODO: resolve this type issue
-		participantViaTodoWhere = participantWhere.where
+		participantViaTodoWhere = participantWhere.where as WhereStatementWithFilterType
 	} else if (participantWhere.where) {
 		participantViaTodoWhere = {
 			OR: [participantWhere.where],
@@ -32,11 +32,11 @@ export const getParticipantsViaTodo: GetParticipantsViaTodo = async (
 	if ('AND' in todoWhere || 'OR' in todoWhere) {
 		const [todosAND, todosOR] = await prisma.$transaction([
 			prisma.todo.findMany({
-				...todoWhere,
+				...(todoWhere as WhereStatement),
 				...todoSelectParticipantIds
 			}),
 			prisma.todo.findMany({
-				...todoWhere,
+				...(todoWhere as WhereStatement),
 				...todoSelectParticipantIds
 			})
 		])

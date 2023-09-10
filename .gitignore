@@ -9,6 +9,9 @@
 /coverage
 /playwright-report/
 
+# Dependency analysis
+/analyze
+
 # yarn
 .pnp.*
 .yarn/*

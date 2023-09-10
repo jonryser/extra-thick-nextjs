@@ -40,6 +40,8 @@
 	},
 	"include": [
 		"src",
+		"src/types/next-auth.d.ts",
+		"next-env.d.ts",
 		"node_modules/@types",
 		"__tests__/**/**.ts",
 		"__tests__/**/**.tsx",

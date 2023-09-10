@@ -1,15 +1,18 @@
 import { about } from 'client.config'
+import { AboutConfig } from 'types/Config'
+
+const { description, linkLabel, title } = about as AboutConfig
 
 const client = {
 	about: {
 		title: {
-			message: about.title
+			message: title
 		},
 		description: {
-			message: about.description
+			message: description
 		},
 		linkLabel: {
-			message: about.linkLabel
+			message: linkLabel
 		}
 	}
 }
