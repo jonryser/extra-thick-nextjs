@@ -6,7 +6,7 @@
 import { Prisma, TodoStatus, User } from '@prisma/client'
 import { ReactNode } from 'react'
 import { PaginatedResponse } from 'types/PaginatedResponse'
-import { z } from 'zod'
+import { z as zod } from 'zod'
 import { todoDefaultIncludes } from 'utils/includes/todoIncludes'
 
 export type Todo = Prisma.TodoGetPayload<typeof todoDefaultIncludes>
@@ -92,34 +92,36 @@ export type SelectOptionsType<T = unknown> = {
 	meta?: T
 }
 
-export const TodoSchema = z.object({
-	title: z.string(),
-	coordinator: z.object({ label: z.string(), value: z.string() }).transform((val) => val.value),
-	endDate: z.string().refine((date) => {
+export const TodoSchema = zod.object({
+	title: zod.string(),
+	coordinator: zod
+		.object({ label: zod.string(), value: zod.string() })
+		.transform((val) => val.value),
+	endDate: zod.string().refine((date) => {
 		return new Date(date) > new Date()
 	}, 'The end date must be after today'),
-	description: z.string(),
-	status: z.nativeEnum(TodoStatus).optional().default('new'),
-	image: z.any().optional(),
-	dataTypes: z
-		.object({ label: z.string(), value: z.string() })
+	description: zod.string(),
+	status: zod.nativeEnum(TodoStatus).optional().default('new'),
+	image: zod.any().optional(),
+	dataTypes: zod
+		.object({ label: zod.string(), value: zod.string() })
 		.array()
 		.transform((val) => val.map((v) => v.value))
 		.refine((data) => data.length > 0, {
 			message: 'At least one data type required',
 			path: ['dataTypes'] // path of error
 		}),
-	documentation: z.any().array().optional()
+	documentation: zod.any().array().optional()
 })
 
 // The shape of data in outgoing axios requests
-export type TodoInput = z.infer<typeof TodoSchema>
+export type TodoInput = zod.infer<typeof TodoSchema>
 
 export type TodoInputPreTransform = Omit<TodoInput, 'coordinator' | 'dataTypes'> & {
 	coordinator?: SelectOptionsType
 	dataTypes?: SelectOptionsType[]
 }
 
-export const publicFilesSchema = z.object({
-	documentation: z.any().array()
+export const publicFilesSchema = zod.object({
+	documentation: zod.any().array()
 })

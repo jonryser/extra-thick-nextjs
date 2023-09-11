@@ -6,7 +6,7 @@
 
 // Write your data models here
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DB_URL")
 }
 
@@ -75,7 +75,7 @@ enum TodoStatus {
   archived
 }
 
-enum TodoDataTypeEnum {
+enum TodoDataType {
   analyses
   healthRecords
   geneticData
@@ -83,25 +83,17 @@ enum TodoDataTypeEnum {
 }
 
 model Todo {
-  id             String                @id @default(cuid())
-  description    String
-  image          Avatar?
-  status         TodoStatus            @default(new)
-  submissionDate DateTime              @default(now()) @map("submission_date")
-  endDate        DateTime              @map("end_date")
-  title          String
-  dataTypes      TodoDataType[]
-  users          CoordinatorsOnTodos[]
-  participants   ParticipantsOnTodos[]
-  documentation  Document[]
-}
-
-model TodoDataType {
-  id       String           @id @default(cuid())
-  user     Todo             @relation(fields: [nodeId], references: [id])
-  nodeId   String           @unique @map("node_id")
-  position Int
-  value    TodoDataTypeEnum
+  id              String                @id @default(cuid())
+  description     String
+  image           Avatar?
+  status          TodoStatus            @default(new)
+  submissionDate  DateTime              @default(now()) @map("submission_date")
+  endDate         DateTime              @map("end_date")
+  title           String
+  dataTypes       TodoDataType[]        @map("data_types")
+  users           CoordinatorsOnTodos[]
+  participants    ParticipantsOnTodos[]
+  documentation   Document[]
 }
 
 model Avatar {
@@ -165,21 +157,13 @@ enum MethodType {
 }
 
 model EventLog {
-  id         String           @id @default(cuid())
+  id         String     @id @default(cuid())
   model      String
-  recordIds  EventRecordId[]
-  methodType MethodType       @map("method_type")
-  insertedAt DateTime         @default(now()) @map("inserted_at")
+  recordIds  String[]   @map("record_id")
+  methodType MethodType @map("method_type")
+  insertedAt DateTime   @default(now()) @map("inserted_at")
   body       Json?
-  userId     String?          @map("user_id")
-}
-
-model EventRecordId {
-  id       String   @id @default(cuid())
-  eventLog EventLog @relation(fields: [nodeId], references: [id])
-  nodeId   String   @unique @map("node_id")
-  position Int
-  value    String
+  userId     String?    @map("user_id")
 }
 
 model Participant {
