@@ -7,7 +7,7 @@
 // Write your data models here
 datasource db {
   provider = "postgresql"
-  url      = env("DB_URL")
+  url = env("PG_PRISMA_URL") // uses connection pooling
 }
 
 generator client {
