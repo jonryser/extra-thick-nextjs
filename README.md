@@ -28,4 +28,4 @@
 
 ## Linting and Formatting
 
-For linting and formatting see [`LINTING.md`](./Linting.md).
+For linting and formatting see [`LINTING.md`](./LINTING.md).
