@@ -1,5 +1,5 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { faker } from '@faker-js/faker'
-import { render } from '@testing-library/react'
 import React from 'react'
 // Constants.
 import {
@@ -173,14 +173,6 @@ describe('getMetaTags', () => {
 })
 
 describe('getScripts', () => {
-	const data = [
-		{ name: faker.lorem.word(), content: faker.lorem.words(3) },
-		{ property: faker.lorem.word(), content: faker.lorem.words(3) }
-	]
-	const defaults = [
-		{ name: faker.lorem.word(), content: faker.lorem.words(3) },
-		{ property: faker.lorem.word(), content: faker.lorem.words(3) }
-	]
 	const jsFileName = faker.system.commonFileName('js')
 	const expectedKey = `${DEFAULT_SCRIPT_KEY_PREFIX}0`
 

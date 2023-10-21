@@ -1,11 +1,10 @@
 {
 	"compilerOptions": {
-		"target": "es6",
+		"target": "es5",
 		"lib": ["dom", "dom.iterable", "esnext"],
 		"allowJs": true,
 		"skipLibCheck": true,
 		"esModuleInterop": true,
-		"allowSyntheticDefaultImports": true,
 		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"noFallthroughCasesInSwitch": true,
@@ -21,6 +20,7 @@
 		"downlevelIteration": true,
 		"paths": {
 			"styles/*": ["src/styles/*"],
+			"components/*": ["src/components/*"],
 			"common/*": ["src/components/common/*"],
 			"partials/*": ["src/components/partials/*"],
 			"pages/*": ["src/components/pages/*"],
@@ -30,9 +30,9 @@
 			"reducers/*": ["src/store/reducers/*"],
 			"types/*": ["src/types/*"],
 			"utils/*": ["src/utils/*"],
-			"models/*": ["src/models/*"],
 			"icons": ["public/icons"],
 			"dictionary/*": ["src/dictionary/*"],
+			"config": ["src/utils/config.ts"],
 			"client.config": ["client.config.js"],
 			"__tests__/*": ["__tests__/*"],
 			"__mocks__/*": ["__tests__/__mocks__/*"]
@@ -41,13 +41,10 @@
 	"include": [
 		"src",
 		"node_modules/@types",
+		"next-env.d.ts",
+		"process.d.ts",
 		"__tests__/**/**.ts",
-		"__tests__/**/**.tsx",
-		"playwright.config.ts",
-		"prisma/seed.ts",
-		"client.config.js",
-		"tailwind.config.js",
-		"public/icons"
+		"__tests__/**/**.tsx"
 	],
 	"exclude": ["node_modules"]
 }

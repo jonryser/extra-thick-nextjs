@@ -1,11 +1,28 @@
+if (!process.env.WP_DOMAIN) {
+  throw new Error(`
+    Please provide a valid WordPress instance Domain.
+    Set to the environment variables WP_DOMAIN.
+  `)
+}
+
 /** @type {import('next').NextConfig} */
 
-const nextConfig = {
+// Doc: https://www.npmjs.com/package/@next/bundle-analyzer
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+	enabled: process.env.ANALYZE === 'true'
+})
+
+module.exports = withBundleAnalyzer({
 	reactStrictMode: true,
-	compiler: {},
-	images: {
-		domains: ['unsplash.com', 'res.cloudinary.com', 'nativebio.org']
-	},
+  images: {
+    domains: [
+      process.env.WP_DOMAIN,
+      '0.gravatar.com',
+      '1.gravatar.com',
+      '2.gravatar.com',
+      'secure.gravatar.com',
+    ],
+  },
 	output: 'standalone',
 	webpack: (config) => {
 		// Fixes npm packages that depend on `fs` module
@@ -24,12 +41,10 @@ const nextConfig = {
 	i18n: {
 		locales: ['en'],
 		defaultLocale: 'en'
-	}
-}
-
-// Refer to bundle analyzer docs if additional
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-	enabled: process.env.ANALYZE === 'true'
+	},
+	eslint: {
+		// Note: linting is already run on PRs into development;
+		// Doing it during build-time is duplicative
+		ignoreDuringBuilds: true
+	},
 })
-
-module.exports = withBundleAnalyzer(nextConfig)
