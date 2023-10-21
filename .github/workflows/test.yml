@@ -118,7 +118,7 @@ jobs:
           echo 'yarn version: '$(yarn --version)
           echo "::endgroup::"
 
-          yarn
+          yarn install --frozen-lockfile
 
       - name: Lint project
         env:
