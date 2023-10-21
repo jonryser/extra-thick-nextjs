@@ -1,35 +1,31 @@
-# Next Launch 🚀
+# Extra Thick Front End
 
-Are you ready to launch your next Next project?
+## Requirements
 
-This starter kit contains everything you need to launch your project into production, quickly.
+1. [Node](https://nodejs.org/en/) version 20.1.0
 
-This [Next.js](https://nextjs.org/) project was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), and modified to include all of the bells and whistles needed to deliver production ready web applications, fast.
+   - This project is setup to use [asdf](https://github.com/asdf-vm/asdf).
+     This allows installing a specific version for the project.
+     To install nodejs with asdf, see [https://github.com/asdf-vm/asdf-nodejs](https://github.com/asdf-vm/asdf-nodejs)
 
-## Create repository
+   - If using [nvm](https://github.com/nvm-sh/nvm), run `nvm use` to set a compatible version based on the project [.nvmrc](./.nvmrc)
 
-Create a repository based on this template.
+2. Yarn (for package management) version 3.5.1
 
-Clone the new repo locally.
+   - This project is setup to use [asdf](https://github.com/asdf-vm/asdf).
+     This allows installing a specific version for the project.
+     To install yarn with asdf, see [https://github.com/twuni/asdf-yarn](https://github.com/twuni/asdf-yarn)
 
-Periodically, the template will get updates. If the updates in the template are desired, pull the changes from the template to the new repo. See ["GitHub - Pull changes from a template repository" on StackOverflow](https://stackoverflow.com/a/56577320).
+   - Or install globally via npm: `npm i -g yarn`
 
-Add the template repository as a remote
+   - Or install globally via Homebrew: `brew install yarn`
 
-``` sh
-git remote add template git@github.com:generalui/next-launch.git
-```
+   - The correct version of yarn has been committed to this repo (in [.yarn](./.yarn/releases)).
+     As long as node is installed and a version of yarn is available on the system, this should "just work" and use the project version.
+     If there are any issues, or the version needs to be updated, follow the steps below.
 
-Now it is possible to merge branches from the template to the new repo:
+   - Set the version for the project ie: `yarn set version 3.5.1`
 
-``` sh
-git merge template/[branch to merge] --allow-unrelated-histories
-```
+## Linting and Formatting
 
-## Developing
-
-To get started with building out your app see the [development documentation](/DEVELOPMENT.md).
-
-## Contributing
-
-To make a contribution or ask questions see the [contributing documentation](/CONTRIBUTING.md).
+For linting and formatting see [`LINTING.md`](./Linting.md).

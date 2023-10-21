@@ -1,4 +1,4 @@
-name: Deploy to Dreamhost Server
+name: Deploy to Vercel
 on:
   push:
     branches:

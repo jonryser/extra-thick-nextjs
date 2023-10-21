@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import { faker } from '@faker-js/faker'
 import React from 'react'
 // Constants.
