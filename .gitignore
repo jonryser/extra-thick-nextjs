@@ -7,19 +7,6 @@
 
 # testing
 /coverage
-/playwright-report/
-
-# Dependency analysis
-/analyze
-
-# yarn
-.pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
 
 # next.js
 /.next/
@@ -31,31 +18,18 @@
 # misc
 .DS_Store
 *.pem
-*.history
-.eslintcache
-tsconfig.tsbuildinfo
 
 # debug
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-.pnpm-debug.log*
-*.log
 
 # local env files
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+.env*.local
 
-# Local seed scripts
-*.local.ts
-*.local.js
+# vercel
+.vercel
 
-# Docs
-# TODO: add this folder to the github project once jsdoc kinks are worked out
-/docs/
-/test-results/
-/playwright-report/
-/playwright/.cache/
+# typescript
+*.tsbuildinfo
+next-env.d.ts

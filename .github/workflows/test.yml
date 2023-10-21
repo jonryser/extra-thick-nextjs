@@ -1,7 +1,7 @@
 name: Run All Tests
 on:
   pull_request:
-    branches: [develop, staging]
+    branches: [develop]
     types: [opened, reopened, synchronize]
   workflow_dispatch:
 jobs:
@@ -11,20 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       branch: ${{ steps.target_branch.outputs.branch }}
-      changed_deps: ${{ steps.changed-deps.outputs.any_changed }}
+      changed_deps: ${{ steps.changed_deps.outputs.any_changed }}
       env_name: ${{ steps.environment.outputs.name }}
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
       - name: Get target branch
         run: |
           branch=${{ github.event.pull_request.base.ref }}
           echo "branch=${branch}" >> $GITHUB_OUTPUT
 
-          echo "::group::Bramch"
+          echo "::group::Branch"
           echo 'environment: '${branch}
           echo "::endgroup::"
         id: target_branch
@@ -43,17 +38,24 @@ jobs:
           echo "::endgroup::"
         id: environment
 
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       - name: Get changed dependency files
-        id: changed-deps
-        uses: tj-actions/changed-files@v36
+        id: changed_deps
+        uses: tj-actions/changed-files@v39
         with:
           files: |
             package.json
             yarn.lock
 
-      - name: Run step if any file(s) in the docs folder change
-        if: steps.changed-deps.outputs.any_changed == 'true'
-        run: echo "name=${env}" >> $GITHUB_OUTPUT
+      - name: Did Deps Change
+        run: |
+          echo "::group::Changes"
+          echo 'Changed?: '${{ steps.changed_deps.outputs.any_changed }}
+          echo "::endgroup::"
 
   # build_dep_image:
   #   name: Build dependency image
@@ -62,7 +64,7 @@ jobs:
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Checkout code
-  #       uses: actions/checkout@v3
+  #       uses: actions/checkout@v4
   #       with:
   #         fetch-depth: 0
 
@@ -87,7 +89,7 @@ jobs:
       name: ${{ needs.info.outputs.env_name }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
@@ -120,10 +122,6 @@ jobs:
 
       - name: Lint project
         run: yarn lint
-
-      # TODO: fix playwright tests and add back into gh actions
-      # - name: Install Playwright
-      #   run: npx playwright install --with-deps
 
       - name: Run Jest
         run: yarn test:unit

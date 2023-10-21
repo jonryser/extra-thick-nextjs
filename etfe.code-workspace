@@ -1,0 +1,35 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"cSpell.enableFiletypes": ["dockercompose", "dockerfile"],
+		"editor.defaultFormatter": "esbenp.prettier-vscode",
+		"editor.formatOnSave": true,
+		"editor.tabSize": 2,
+		"files.associations": {
+			"*.dockerignore": "ignore",
+			".env-*": "dotenv",
+			"Dockerfile-*": "dockerfile",
+			"*.conf.template": "nginx",
+			".nvmrc": "shellscript"
+		},
+		"files.eol": "\n",
+		"[javascript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[jsonc]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[typescriptreact]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"[typescript]": {
+			"editor.defaultFormatter": "esbenp.prettier-vscode"
+		},
+		"workbench.editor.highlightModifiedTabs": true,
+		"dotenv.enableAutocloaking": false
+	}
+}
