@@ -1,5 +1,5 @@
 import NextHead from 'next/head'
-import { useEffect, useState } from 'react'
+import { PropsWithChildren, useEffect, useState } from 'react'
 import { getLinkTags, getMetaTags, getScriptTags, getStyles, getTitleTag } from 'utils/Head'
 // Components.
 import HeadProps, { HeadData, PageTags } from './HeadProps'
@@ -8,12 +8,12 @@ import HeadProps, { HeadData, PageTags } from './HeadProps'
  * NOTE: keys should be generated in the following convention:
  * {tagName}-{{relValueIfAvailable}-}{srcWithProtocolRemovedOrFrontSlashesRemoved}
  */
-export default function Head({
+export function Head({
 	children,
 	data = {} as HeadData,
 	defaultTags = {} as PageTags,
 	root = ''
-}: HeadProps) {
+}: PropsWithChildren<HeadProps>) {
 	const { link, meta, script, title } = data
 	const {
 		link: linkDefaults,
