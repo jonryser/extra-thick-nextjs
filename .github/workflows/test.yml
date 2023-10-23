@@ -109,8 +109,10 @@ jobs:
           version=$(yarn --version)
           requested_version=${{ vars.YARN_VERSION || 'latest' }}
 
-          yarn set version ${requested_version}
-          yarn plugin import @yarnpkg/plugin-workspace-tools
+          if [ version != requested_version ]
+          then
+            yarn set version ${requested_version}
+          fi
 
           echo "::group::Yarn version"
           echo 'initial yarn version: '${version}
