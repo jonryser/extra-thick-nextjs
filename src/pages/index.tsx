@@ -14,6 +14,11 @@ export default function Index({
 		bioTitle,
 		calendar,
 		calendarTitle,
+		contactInfo: {
+			contact: { name, email },
+			social: { facebook }
+		},
+		contactSectionTitle,
 		heroImage: { altText, mediaItemUrl },
 		musicDesc,
 		musicTitle,
@@ -61,6 +66,25 @@ export default function Index({
 				<div className={panelClass}>
 					<h2 className={h2Class}>{calendarTitle}</h2>
 					<Calendar events={events} />
+					<h2 className={h2Class}>{contactSectionTitle}</h2>
+					<p className={`pb-6`}>
+						<span className={`block`}>{name}</span>
+						<span className={`block`}>
+							<a
+								href={`mailto:${facebook}`}
+								className={``}
+								title={`Send Moose from Extra Thick an email`}
+							>
+								{email}
+							</a>
+						</span>
+					</p>
+					{facebook && (
+						<p>
+							{`Follow us on `}
+							<a href={facebook} className={``} title={`Extra Thick on Facebook`}>{`Facebook`}</a>
+						</p>
+					)}
 				</div>
 				<div className={`${panelClass} bg-gray-2`}>
 					<h2 className={h2Class}>{bioTitle}</h2>
@@ -78,9 +102,14 @@ export default function Index({
 }
 
 export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
-	const data: Record<string, unknown> = await getDataForHome()
+	const {
+		contactInfo,
+		homePage: data
+	}: { contactInfo: Record<string, unknown>; homePage: Record<string, unknown> } =
+		await getDataForHome()
 	const calendar = JSON.stringify(await getIcs(data?.calendarId as string))
 	data.calendar = calendar
+	data.contactInfo = contactInfo
 
 	return {
 		props: { data, preview },

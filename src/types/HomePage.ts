@@ -3,6 +3,14 @@ export interface HomePageData {
 	bioTitle: string
 	calendar: string
 	calendarTitle: string
+	contactInfo: {
+		contact: {
+			name: string
+			email: string
+		}
+		social: { facebook: string }
+	}
+	contactSectionTitle: string
 	heroImage: { altText: string; mediaItemUrl: string }
 	musicDesc: string
 	musicTitle: string
