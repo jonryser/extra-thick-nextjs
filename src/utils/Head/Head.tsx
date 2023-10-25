@@ -11,7 +11,7 @@ import {
 	STYLE
 } from 'utils/constants'
 // Utilities.
-import { removeProtocolOrSlash } from 'utils/urlUtil'
+import { removeProtocolOrSlash } from 'utils'
 // Components.
 import {
 	LinkAttr,
