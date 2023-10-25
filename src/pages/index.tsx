@@ -1,15 +1,12 @@
-import { Head } from 'components/partials'
+import { Head } from 'partials'
 import { GetStaticProps } from 'next'
-import Container from 'components/container'
-import Layout from 'components/layout'
-import { getDataForHome } from 'utils/api'
 import Image from 'next/image'
-import { HomePageData, Preview } from 'types/index'
-import { PLACEHOLDER_IMAGE } from 'utils/constants'
-import { HEAD_LINKS, HEAD_META } from 'utils/constants/headData'
+import { Container, Layout } from 'components'
+import { getDataForHome, getIcs } from 'utils'
+import { HomePageData, Preview } from 'types'
+import { HEAD_LINKS, HEAD_META, PLACEHOLDER_IMAGE } from 'utils/constants'
 import { type VCalendar } from 'ts-ics'
-import { Calendar, MusicPlayer } from 'components/widgets'
-import { getIcs } from 'utils/index'
+import { Calendar, MusicPlayer } from 'widgets'
 
 export default function Index({
 	data: {

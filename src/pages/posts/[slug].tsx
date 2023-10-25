@@ -2,18 +2,20 @@ import { useRouter } from 'next/router'
 import ErrorPage from 'next/error'
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps, PreviewData } from 'next'
-import Container from 'components/container'
-import PostBody from 'components/post-body'
-import MoreStories from 'components/more-stories'
-import Header from 'components/header'
-import PostHeader from 'components/post-header'
-import SectionSeparator from 'components/section-separator'
-import Layout from 'components/layout'
-import PostTitle from 'components/post-title'
-import Tags from 'components/tags'
-import { getAllPostsWithSlug, getPostAndMorePosts } from 'utils/api'
+import {
+	Container,
+	Header,
+	Layout,
+	MoreStories,
+	PostBody,
+	PostHeader,
+	PostTitle,
+	SectionSeparator,
+	Tags
+} from 'components'
+import { getAllPostsWithSlug, getPostAndMorePosts } from 'utils'
 import { CMS_NAME } from 'utils/constants'
-import { PostEdge, Post, Preview } from 'types/index'
+import { PostEdge, Post, Preview } from 'types'
 import { ParsedUrlQuery } from 'querystring'
 
 interface PostProps {

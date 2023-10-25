@@ -50,6 +50,17 @@ export const HEAD_LINKS = [
 export function HEAD_META(homeOgImageUrl: string) {
 	return [
 		{
+			charSet: 'utf-8'
+		},
+		{
+			content: `IE=edge`,
+			httpEquiv: `X-UA-Compatible`
+		},
+		{
+			content: `user-scalable=no, initial-scale=1.0, maximum-scale=1, minimum-scale=1, width=device-width`,
+			name: `viewport`
+		},
+		{
 			content: '#000000',
 			name: 'msapplication-TileColor'
 		},

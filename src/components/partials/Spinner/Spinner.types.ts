@@ -1,3 +1,3 @@
-import { CommonProps } from 'types/CommonProps'
+import { CommonProps } from 'types'
 
 export interface SpinnerProps extends CommonProps {}

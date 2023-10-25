@@ -1,5 +1,5 @@
 import { PreviewData } from 'next/types'
-import { Post, Preview } from 'types/index'
+import { Post, Preview } from 'types'
 
 const GRAPHQL_URL = process.env.GRAPHQL_URL
 

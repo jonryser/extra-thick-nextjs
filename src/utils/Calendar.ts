@@ -1,5 +1,5 @@
 import { VCalendar, parseIcsCalendar } from 'ts-ics'
-import { ICS_URL } from './constants'
+import { ICS_URL } from 'utils/constants'
 
 export async function getIcs(id: string): Promise<VCalendar | undefined> {
 	try {

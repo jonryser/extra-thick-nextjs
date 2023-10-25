@@ -1,3 +1,3 @@
 export * from './example'
-export * from './pageTags'
+export * from './headData'
 export * from './values'

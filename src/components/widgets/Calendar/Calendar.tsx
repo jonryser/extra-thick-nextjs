@@ -37,5 +37,5 @@ export function Calendar({ events }: { events?: VEvent[] }) {
 			</div>
 		)
 	})
-	return elements
+	return <>{elements}</>
 }
