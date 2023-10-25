@@ -8,7 +8,13 @@ export interface HomePageData {
 			name: string
 			email: string
 		}
-		social: { facebook: string }
+		social: {
+			base_camp?: string
+			facebook?: string
+			instagram?: string
+			reverbnation?: string
+			twitter_x?: string
+		}
 	}
 	contactSectionTitle: string
 	heroImage: { altText: string; mediaItemUrl: string }

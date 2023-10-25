@@ -16,7 +16,7 @@ export default function Index({
 		calendarTitle,
 		contactInfo: {
 			contact: { name, email },
-			social: { facebook }
+			social: { base_camp, facebook, instagram, reverbnation, twitter_x }
 		},
 		contactSectionTitle,
 		heroImage: { altText, mediaItemUrl },
@@ -79,10 +79,46 @@ export default function Index({
 							</a>
 						</span>
 					</p>
+					{base_camp && (
+						<p>
+							{`Follow us on `}
+							<a href={base_camp} className={``} title={`Extra Thick on BaseCamp`}>{`BaseCamp`}</a>
+						</p>
+					)}
 					{facebook && (
 						<p>
 							{`Follow us on `}
 							<a href={facebook} className={``} title={`Extra Thick on Facebook`}>{`Facebook`}</a>
+						</p>
+					)}
+					{instagram && (
+						<p>
+							{`Follow us on `}
+							<a
+								href={instagram}
+								className={``}
+								title={`Extra Thick on Instagram`}
+							>{`Instagram`}</a>
+						</p>
+					)}
+					{reverbnation && (
+						<p>
+							{`Follow us on `}
+							<a
+								href={reverbnation}
+								className={``}
+								title={`Extra Thick on Reverbnation`}
+							>{`Reverbnation`}</a>
+						</p>
+					)}
+					{twitter_x && (
+						<p>
+							{`Follow us on `}
+							<a
+								href={twitter_x}
+								className={``}
+								title={`Extra Thick on Twitter (X)`}
+							>{`Twitter (X)`}</a>
 						</p>
 					)}
 				</div>
