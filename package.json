@@ -7,11 +7,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/luxon": "^3.3.3",
     "classnames": "^2.3.2",
     "date-fns": "^2.28.0",
+    "luxon": "^3.4.3",
     "next": "13.5.4",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "ts-ics": "^1.0.10",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@faker-js/faker": "^8.1.0",

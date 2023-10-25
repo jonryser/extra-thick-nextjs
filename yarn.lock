@@ -686,6 +686,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/luxon@npm:^3.3.3":
+  version: 3.3.3
+  resolution: "@types/luxon@npm:3.3.3"
+  checksum: 072dd39eea3f63453788fab2fcfc83eb33917afcaffe178ce08ecd8b016824b8ab3bfa991f66266f2fc1927768a56b4334945f2eb1d83638e325c0c43d7d0e86
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*":
   version: 20.8.5
   resolution: "@types/node@npm:20.8.5"
@@ -3520,6 +3527,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"luxon@npm:^3.4.3":
+  version: 3.4.3
+  resolution: "luxon@npm:3.4.3"
+  checksum: 3eade81506224d038ed24035a0cd0dd4887848d7eba9361dce9ad8ef81380596a68153240be3988721f9690c624fb449fcf8fd8c3fc0681a6a8496faf48e92a3
+  languageName: node
+  linkType: hard
+
 "lz-string@npm:^1.5.0":
   version: 1.5.0
   resolution: "lz-string@npm:1.5.0"
@@ -4557,6 +4571,7 @@ __metadata:
     "@testing-library/react": ^14.0.0
     "@trivago/prettier-plugin-sort-imports": ^4.2.0
     "@types/jest": ^29.5.5
+    "@types/luxon": ^3.3.3
     "@types/node": ^18.6.3
     "@types/react": ^18.0.15
     "@types/react-dom": ^18.0.6
@@ -4570,14 +4585,17 @@ __metadata:
     eslint-config-prettier: ^9.0.0
     eslint-plugin-prettier: ^5.0.0
     eslint-plugin-unused-imports: ^3.0.0
+    luxon: ^3.4.3
     next: 13.5.4
     postcss: 8.4.31
     prettier: ^3.0.3
     react: ^18.2.0
     react-dom: ^18.2.0
     tailwindcss: ^3.0.24
+    ts-ics: ^1.0.10
     ts-node: ^10.9.1
     typescript: ^4.7.4
+    zod: ^3.22.4
   languageName: unknown
   linkType: soft
 
@@ -5132,6 +5150,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ts-ics@npm:^1.0.10":
+  version: 1.0.10
+  resolution: "ts-ics@npm:1.0.10"
+  peerDependencies:
+    date-fns: ^2
+    lodash: ^4
+    zod: ^3
+  checksum: 3e1f8fdaf48f787c4a9099d3e7c7d13bdf49231f12eca1234a670de542cb4fe090d6fd0b82a38ee17686c12c30dc87bb44e16038c5a611814bcd6e43bfeef053
+  languageName: node
+  linkType: hard
+
 "ts-interface-checker@npm:^0.1.9":
   version: 0.1.13
   resolution: "ts-interface-checker@npm:0.1.13"
@@ -5536,5 +5565,12 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zod@npm:^3.22.4":
+  version: 3.22.4
+  resolution: "zod@npm:3.22.4"
+  checksum: 80bfd7f8039b24fddeb0718a2ec7c02aa9856e4838d6aa4864335a047b6b37a3273b191ef335bf0b2002e5c514ef261ffcda5a589fb084a48c336ffc4cdbab7f
   languageName: node
   linkType: hard
