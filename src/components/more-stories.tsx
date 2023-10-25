@@ -1,4 +1,4 @@
-import { PostEdge } from 'types/Categories'
+import { PostEdge } from 'types/API'
 import PostPreview from './post-preview'
 
 export default function MoreStories({ posts }: { posts: PostEdge[] }) {

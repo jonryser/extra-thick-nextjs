@@ -102,6 +102,36 @@ export async function getAllPostsForHome(preview: Preview) {
 	return data?.posts
 }
 
+export async function getDataForHome() {
+	const data = await fetchAPI(
+		`query HomePage {
+      pages {
+        nodes {
+          homePage {
+            bio
+            bioTitle
+            calendarId
+            calendarTitle
+            heroImage {
+              altText
+              mediaItemUrl
+            }
+            imgCaption
+            musicDesc
+            musicTitle
+            playerSectionTitle
+            playerTitle
+            rnArtistId
+            title
+          }
+        }
+      }
+    }`
+	)
+
+	return data?.pages.nodes[0].homePage
+}
+
 export async function getPostAndMorePosts({
 	slug,
 	preview,

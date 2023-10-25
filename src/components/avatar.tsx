@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Author } from 'types/Categories'
+import { Author } from 'types/API'
 
 export default function Avatar({ author }: { author: Author }) {
 	const isAuthorHaveFullName = author?.node?.firstName && author?.node?.lastName
