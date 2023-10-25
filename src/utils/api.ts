@@ -107,11 +107,21 @@ export async function getDataForHome() {
 		`query HomePage {
       pages {
         nodes {
+          contactInfo {
+            contact {
+              name
+              email
+            }
+            social {
+              facebook
+            }
+          }
           homePage {
             bio
             bioTitle
             calendarId
             calendarTitle
+            contactSectionTitle
             heroImage {
               altText
               mediaItemUrl
@@ -129,7 +139,7 @@ export async function getDataForHome() {
     }`
 	)
 
-	return data?.pages.nodes[0].homePage
+	return data?.pages.nodes[0]
 }
 
 export async function getPostAndMorePosts({
