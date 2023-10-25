@@ -1,5 +1,4 @@
 export default interface HeadProps {
-	children?: JSX.Element
 	data?: HeadData
 	defaultTags?: PageTags
 	root?: string
