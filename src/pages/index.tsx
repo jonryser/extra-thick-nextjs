@@ -143,8 +143,7 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 		homePage: data
 	}: { contactInfo: Record<string, unknown>; homePage: Record<string, unknown> } =
 		await getDataForHome()
-	const calendar = JSON.stringify(await getIcs(data?.calendarId as string))
-	data.calendar = calendar
+	data.calendar = JSON.stringify(await getIcs(data?.calendarId as string))
 	data.contactInfo = contactInfo
 
 	return {
