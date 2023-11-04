@@ -104,6 +104,7 @@
 }
 
 img.hero {
+	aspect-ratio: 55 / 19;
 	width: 100%;
 	height: auto;
 }
@@ -123,4 +124,10 @@ img.hero {
 	left: 0;
 	right: 0;
 	bottom: 0;
+}
+
+.poster-calendar {
+	margin-left: 40px;
+	width: auto;
+	max-height: 200px;
 }
