@@ -1,47 +1,71 @@
+// Possible `rel` attribute values
+export const ALTERNATE = `alternate`
+export const APPLE_TOUCH_ICON = `apple-touch-icon`
+export const AUTHOR = `author`
+export const DNS_PREFETCH = `dns-prefetch`
+export const FETCH = `fetch`
+export const HELP = `help`
+export const ICON = `icon`
+export const LICENSE = `license`
+export const MANIFEST = `manifest`
+export const MASK_ICON = `mask-icon`
+export const NEXT = `next`
+export const PING_BACK = `pingback`
+export const PRECONNECT = `preconnect`
+export const PREFETCH = `prefetch`
+export const PRELOAD = `preload`
+export const PRERENDER = `prerender`
+export const PREV = `prev`
+export const SCRIPT = `script`
+export const SEARCH = `search`
+export const SHORTCUT_ICON = `shortcut icon`
+export const STYLE = `style`
+export const STYLE_SHEET = `stylesheet`
+
 export const HEAD_LINKS = [
 	{
-		rel: 'preconnect',
+		rel: PRECONNECT,
 		href: 'https://fonts.googleapis.com'
 	},
 	{
 		crossOrigin: 'crossorigin',
-		rel: 'preconnect',
+		rel: PRECONNECT,
 		href: 'https://fonts.gstatic.com'
 	},
 	{
-		rel: 'stylesheet',
+		rel: STYLE_SHEET,
 		href: 'https://fonts.googleapis.com/css2?family=Roboto&display=swap'
 	},
 	{
-		rel: 'apple-touch-icon',
+		rel: APPLE_TOUCH_ICON,
 		sizes: '180x180',
 		href: '/favicon/apple-touch-icon.png'
 	},
 	{
-		rel: 'icon',
+		rel: ICON,
 		type: 'image/png',
 		href: '/favicon/favicon-32x32.png'
 	},
 	{
-		rel: 'icon',
+		rel: ICON,
 		type: 'image/png',
 		href: '/favicon/favicon-16x16.png'
 	},
 	{
-		rel: 'manifest',
+		rel: MANIFEST,
 		href: '/favicon/site.webmanifest'
 	},
 	{
-		rel: 'mask-icon',
+		rel: MASK_ICON,
 		href: '/favicon/safari-pinned-tab.svg',
 		color: '#000000'
 	},
 	{
-		rel: 'shortcut icon',
+		rel: SHORTCUT_ICON,
 		href: '/favicon/favicon.ico'
 	},
 	{
-		rel: 'alternate',
+		rel: ALTERNATE,
 		href: '/feed.xml',
 		type: 'application/rss+xml'
 	}
