@@ -1,6 +1,6 @@
 import cn from 'classnames'
-import Image from 'next/image'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Image as ImageType } from 'types'
 
 interface Props {

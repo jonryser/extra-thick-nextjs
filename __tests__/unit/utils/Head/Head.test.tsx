@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import { faker } from '@faker-js/faker'
-import React from 'react'
+import { Fragment } from 'react'
 // Constants.
 import {
 	DNS_PREFETCH,
@@ -23,7 +23,7 @@ import {
 	getScripts,
 	getStyles,
 	getTitleTag
-} from './Head'
+} from 'utils/Head'
 
 const domain = `${faker.internet.protocol}://${faker.internet.domainName}/`
 const inlineJsType = `text/javascript`
@@ -187,9 +187,9 @@ describe('getScripts', () => {
 		])
 
 		expect(elements).toEqual([
-			<React.Fragment key={expectedKey}>
+			<Fragment key={expectedKey}>
 				<script src={`${pageRoot}${jsFileName}`} />
-			</React.Fragment>
+			</Fragment>
 		])
 	})
 
@@ -198,9 +198,9 @@ describe('getScripts', () => {
 		const elements = getScripts(pageRoot, [data])
 
 		expect(elements).toEqual([
-			<React.Fragment key={expectedKey}>
+			<Fragment key={expectedKey}>
 				<script type={inlineJsType} dangerouslySetInnerHTML={{ __html: data.inline.value }} />
-			</React.Fragment>
+			</Fragment>
 		])
 	})
 
@@ -216,9 +216,9 @@ describe('getScripts', () => {
 		])
 
 		expect(elements).toEqual([
-			<React.Fragment key={expectedKey}>
+			<Fragment key={expectedKey}>
 				<script src={jsFileName} async defer />
-			</React.Fragment>
+			</Fragment>
 		])
 	})
 
@@ -231,12 +231,12 @@ describe('getScripts', () => {
 		const elements = getScripts('/', data)
 
 		expect(elements).toEqual([
-			<React.Fragment key={expectedKey}>
+			<Fragment key={expectedKey}>
 				<script src={jsFileName} />
-			</React.Fragment>,
-			<React.Fragment key={`${DEFAULT_SCRIPT_KEY_PREFIX}1`}>
+			</Fragment>,
+			<Fragment key={`${DEFAULT_SCRIPT_KEY_PREFIX}1`}>
 				<script src={jsFileName2} />
-			</React.Fragment>
+			</Fragment>
 		])
 	})
 })
@@ -370,10 +370,10 @@ describe('getTitle', () => {
 	it('should return expected title tag with passed title', () => {
 		const element = getTitleTag(title)
 		expect(element).toEqual(
-			<React.Fragment>
+			<Fragment>
 				<title>{title}</title>
 				{'\n'}
-			</React.Fragment>
+			</Fragment>
 		)
 	})
 

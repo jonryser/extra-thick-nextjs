@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker'
 import { render } from '@testing-library/react'
 // Components.
-import { Head } from './Head'
+import { Head } from 'partials'
 
 const headData1 = {
 	link: [

@@ -1,4 +1,4 @@
-export default interface HeadProps {
+export interface HeadProps {
 	data?: HeadData
 	defaultTags?: PageTags
 	root?: string

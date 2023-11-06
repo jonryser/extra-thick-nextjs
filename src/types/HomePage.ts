@@ -9,7 +9,7 @@ export interface HomePageData {
 			email: string
 		}
 		social: {
-			base_camp?: string
+			band_camp?: string
 			facebook?: string
 			instagram?: string
 			reverbnation?: string

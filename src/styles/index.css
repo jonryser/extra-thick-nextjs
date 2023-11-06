@@ -14,6 +14,10 @@
 
 /* Your own custom utilities */
 
+a:hover {
+	color: orange;
+}
+
 .has-text-align-left {
 	@apply text-left;
 }
@@ -127,7 +131,24 @@ img.hero {
 }
 
 .poster-calendar {
+	border: 1px solid transparent;
 	margin-left: 40px;
 	width: auto;
 	max-height: 200px;
+}
+
+a:hover .poster-calendar {
+	border-color: orange;
+}
+
+.social a:hover svg {
+	fill: orange;
+}
+
+.social a:hover svg {
+	fill: orange;
+}
+
+.icon-social {
+	width: 1.4em;
 }

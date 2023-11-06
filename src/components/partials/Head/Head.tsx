@@ -1,8 +1,8 @@
 import NextHead from 'next/head'
-import { PropsWithChildren, useEffect, useState } from 'react'
-import { getLinkTags, getMetaTags, getScriptTags, getStyles, getTitleTag } from 'utils/Head'
+import { useState, PropsWithChildren, useEffect } from 'react'
+import { getLinkTags, getMetaTags, getScriptTags, getStyles, getTitleTag } from 'utils'
 // Components.
-import HeadProps, { HeadData, PageTags } from './HeadProps'
+import { HeadProps, HeadData, PageTags } from 'partials/Head/HeadProps'
 
 /**
  * NOTE: keys should be generated in the following convention:
