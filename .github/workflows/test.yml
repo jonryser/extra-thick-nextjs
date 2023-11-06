@@ -129,12 +129,12 @@ jobs:
           GRAPHQL_URL: http://${{ vars.WP_DOMAIN }}/graphql
         run: yarn lint
 
-      # - name: Run Jest
-      #   env:
-      #     WP_DOMAIN: ${{ vars.WP_DOMAIN }}
-      #     WP_API_URL: http://${{ vars.WP_DOMAIN }}
-      #     GRAPHQL_URL: http://${{ vars.WP_DOMAIN }}/graphql
-      #   run: yarn test:unit
+      - name: Run Jest
+        env:
+          WP_DOMAIN: ${{ vars.WP_DOMAIN }}
+          WP_API_URL: http://${{ vars.WP_DOMAIN }}
+          GRAPHQL_URL: http://${{ vars.WP_DOMAIN }}/graphql
+        run: yarn test:unit
 
       # - name: Run Playwright tests
       #   run: yarn test:e2e
