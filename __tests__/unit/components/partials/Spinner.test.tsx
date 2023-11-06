@@ -3,7 +3,7 @@
  */
 import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { Spinner } from './index'
+import { Spinner } from 'partials/Spinner'
 
 describe('Spinner Component', () => {
 	it('renders on the page', () => {

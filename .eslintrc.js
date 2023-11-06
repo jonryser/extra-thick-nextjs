@@ -5,7 +5,12 @@ module.exports = {
 		project: './tsconfig.json',
 		extraFileExtensions: ['.json']
 	},
-	plugins: ['@typescript-eslint', 'unused-imports', 'jsx-a11y'],
+	plugins: [
+		'jsx-a11y',
+		'@typescript-eslint',
+		'@trivago/prettier-plugin-sort-imports',
+		'unused-imports'
+	],
 	extends: [
 		'next',
 		'eslint:recommended',

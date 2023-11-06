@@ -19,7 +19,6 @@
 		"baseUrl": ".",
 		"downlevelIteration": true,
 		"paths": {
-			"react": ["node_modules/@types/react"],
 			"styles": ["src/styles"],
 			"styles/*": ["src/styles/*"],
 			"components": ["src/components"],
@@ -49,14 +48,17 @@
 			"dictionary/*": ["src/dictionary/*"],
 			"config": ["src/utils/config.ts"],
 			"client.config": ["client.config.js"],
-			"__tests__": ["__tests__"],
-			"__tests__/*": ["__tests__/*"],
-			"__mocks__": ["__tests__/__mocks__"],
-			"__mocks__/*": ["__tests__/__mocks__/*"]
+			"tests": ["__tests__"],
+			"tests/*": ["__tests__/*"],
+			"testUtils": ["__tests__/utils"],
+			"testUtils/*": ["__tests__/utils/*"],
+			"mocks": ["__tests__/__mocks__"],
+			"mocks/*": ["__tests__/__mocks__/*"]
 		}
 	},
 	"include": [
 		"src",
+		"jest.setup.ts",
 		"node_modules/@types",
 		"next-env.d.ts",
 		"process.d.ts",
