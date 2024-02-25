@@ -1,10 +1,10 @@
 /**
  * Test file for Icon
  */
-import { render, screen } from '@testing-library/react'
 import React from 'react'
-import { siFacebook } from 'simple-icons'
+import { render, screen } from '@testing-library/react'
 import { Icon } from 'partials'
+import { siFacebook } from 'simple-icons'
 
 describe('Icon Component', () => {
 	it('renders on the page', () => {

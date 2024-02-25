@@ -4,6 +4,7 @@ module.exports = {
 	singleQuote: true,
 	jsxSingleQuote: true,
 	printWidth: 100,
+	plugins: ['@trivago/prettier-plugin-sort-imports'],
 	trailingComma: 'none',
 	// import order https://github.com/trivago/prettier-plugin-sort-imports
 	// third party modules are automatically moved to the top
@@ -29,8 +30,8 @@ module.exports = {
 		'^__mocks__/(.*)$',
 		'^[./]'
 	],
-	importOrderSeparation: true,
 	importOrderSortSpecifiers: true,
+
 	overrides: [
 		// Overrides for local json
 		{

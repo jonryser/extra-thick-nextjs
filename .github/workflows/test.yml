@@ -120,7 +120,7 @@ jobs:
           echo 'yarn version: '$(yarn --version)
           echo "::endgroup::"
 
-          yarn install --frozen-lockfile
+          yarn install --immutable
 
       - name: Lint project
         env:

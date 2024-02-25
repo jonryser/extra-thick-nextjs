@@ -1,60 +1,61 @@
 import { DateTime } from 'luxon'
 import { VEvent } from 'ts-ics'
-import { getGoogleDriveImage } from 'utils'
+import { DateFormatType, compareDate, formatDate, normalizeDate } from 'utils'
+import { Event } from './Event'
 
-export function Calendar({ events }: { events?: VEvent[] }) {
-	const elements = events?.map(({ attach, summary, start, end, location, description }, index) => {
-		location = location?.replaceAll('\\', '')
-		const locationList: string[] = location?.split(',') || []
-		const date = DateTime.fromISO(start.date.toString()).toFormat('MMMM dd, yyyy')
-		const endTime = end ? DateTime.fromISO(end.date.toString()).toFormat('h:mm') : end
-		const startTime = DateTime.fromISO(start.date.toString()).toFormat('h:mm')
-		const poster = attach ? getGoogleDriveImage(attach) : undefined
-		return (
-			<div key={index} className={`pb-6 flex`}>
-				<div className={``}>
-					<h3 className={`text-2xl font-bold pb-2`}>{summary}</h3>
-					{locationList[0] && (
-						<p className={`text-1xl font-semibold pb-1`}>{`@ ${locationList[0]}`}</p>
-					)}
-					{date && <p>{date}</p>}
-					{(endTime || startTime) && (
-						<p>
-							{startTime && <span>{startTime}</span>}
-							{startTime && endTime && ` `}
-							{endTime && <span>{`till ${endTime}`}</span>}
-						</p>
-					)}
-					{locationList[1] && (
-						<p>
-							<span className={`block`}>{locationList[1]}</span>
-							{locationList[2] && (
-								<span className={`block`}>
-									{`${locationList[2]}${locationList[3] && `, ${locationList[3]}`}`}
-								</span>
-							)}
-							{locationList[4] && <span className={`block`}>{locationList[4]}</span>}
-						</p>
-					)}
-					{description && <p>{description}</p>}
-				</div>
-				<div>
-					{poster && (
-						<a href={poster} target='_blank' rel='noopener noreferrer'>
-							<img
-								alt={`Poster for ${summary}`}
-								className={'poster-calendar'}
-								height={200}
-								loading={'lazy'}
-								placeholder={'blur'}
-								src={poster}
-								width={100}
-							/>
-						</a>
-					)}
-				</div>
-			</div>
-		)
-	})
+export const NO_EVENTS_MSG = 'Stay tuned!'
+
+export enum SortOrder {
+	ASC = 'asc',
+	DESC = 'desc'
+}
+
+type SortOrderType = SortOrder.ASC | SortOrder.DESC
+
+export function Calendar({
+	all = false,
+	events = [],
+	order = SortOrder.ASC,
+	past = false
+}: {
+	all?: boolean
+	events?: VEvent[]
+	order?: SortOrderType
+	past?: boolean
+}): JSX.Element {
+	const elements: JSX.Element[] = buildAndSortEvents({ all, events, order, past })
+	if (elements.length === 0) {
+		return <p className={'pb-6 flex'}>{NO_EVENTS_MSG}</p>
+	}
 	return <>{elements}</>
+}
+
+function buildAndSortEvents({
+	all = false,
+	events = [],
+	order = SortOrder.ASC,
+	past = false
+}: {
+	all?: boolean
+	events?: VEvent[]
+	order?: SortOrderType
+	past?: boolean
+}): JSX.Element[] {
+	const eventObj: { [date: string]: JSX.Element } = {}
+	events.forEach((event: VEvent, index: number): void => {
+		const date = normalizeDate(event.start.date)
+		const formattedDate = formatDate({ date })
+		if (!formattedDate) return
+		const timestamp = date.getTime()
+		const comparedDates = compareDate(DateTime.fromFormat(formattedDate, DateFormatType.DATE))
+		if (!all && ((past && comparedDates >= 0) || (!past && comparedDates < 0))) {
+			return
+		}
+		eventObj[timestamp] = <Event data={event} index={index} key={`event-${index}`} />
+	})
+	const sortedEvents = Object.keys(eventObj).sort()
+	if (order === SortOrder.DESC) {
+		sortedEvents.reverse()
+	}
+	return sortedEvents.map((timestamp) => eventObj[timestamp])
 }

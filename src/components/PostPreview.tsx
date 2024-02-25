@@ -1,7 +1,7 @@
 import { Avatar, Date } from 'components'
-import CoverImage from './CoverImage'
 import Link from 'next/link'
 import { Post } from 'types'
+import CoverImage from './CoverImage'
 
 export function PostPreview({
 	title,
