@@ -5,7 +5,11 @@ module.exports = {
 		project: './tsconfig.json',
 		extraFileExtensions: ['.json']
 	},
-	plugins: ['@typescript-eslint', 'unused-imports', 'jsx-a11y'],
+	plugins: [
+		'jsx-a11y',
+		'@typescript-eslint',
+		'unused-imports'
+	],
 	extends: [
 		'next',
 		'eslint:recommended',
@@ -27,6 +31,7 @@ module.exports = {
 	},
 	ignorePatterns: [
 		'.eslintrc.js',
+		'jest.config.js',
 		'next.config.js',
 		'postcss.config.js',
 		'.prettierrc.js',
@@ -34,7 +39,7 @@ module.exports = {
 	],
 	overrides: [
 		{
-			files: ['*.spec.*'],
+			files: ['*.spec.*', '*.test.*'],
 			rules: {
 				'react/jsx-no-literals': 'off'
 			}

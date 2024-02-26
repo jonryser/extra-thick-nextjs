@@ -15,13 +15,31 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 module.exports = withBundleAnalyzer({
 	reactStrictMode: true,
 	images: {
-		domains: [
-			process.env.WP_DOMAIN,
-			'0.gravatar.com',
-			'1.gravatar.com',
-			'2.gravatar.com',
-			'drive.google.com',
-			'secure.gravatar.com'
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: process.env.WP_DOMAIN
+			},
+			{
+				protocol: 'https',
+				hostname: '0.gravatar.com'
+			},
+			{
+				protocol: 'https',
+				hostname: '1.gravatar.com'
+			},
+			{
+				protocol: 'https',
+				hostname: '2.gravatar.com'
+			},
+			{
+				protocol: 'https',
+				hostname: 'drive.google.com'
+			},
+			{
+				protocol: 'https',
+				hostname: 'secure.gravatar.com'
+			}
 		]
 	},
 	output: 'standalone',

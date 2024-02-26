@@ -1,5 +1,5 @@
-import { PostEdge } from 'types'
 import { PostPreview } from 'components'
+import { PostEdge } from 'types'
 
 export function MoreStories({ posts }: { posts: PostEdge[] }) {
 	return (

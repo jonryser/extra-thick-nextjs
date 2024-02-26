@@ -1,6 +1,6 @@
 import { Avatar, Categories, Date, PostTitle } from 'components'
-import CoverImage from './CoverImage'
 import { Post } from 'types'
+import CoverImage from './CoverImage'
 
 export function PostHeader({
 	title,

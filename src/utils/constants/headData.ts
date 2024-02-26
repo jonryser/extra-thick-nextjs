@@ -71,7 +71,17 @@ export const HEAD_LINKS = [
 	}
 ]
 
-export function HEAD_META(homeOgImageUrl: string) {
+export function HEAD_META({
+	description,
+	homeOgImageUrl,
+	msapplicationTileColor,
+	themeColor
+}: {
+	description: string
+	homeOgImageUrl: string
+	msapplicationTileColor?: string
+	themeColor?: string
+}) {
 	return [
 		{
 			charSet: 'utf-8'
@@ -85,7 +95,7 @@ export function HEAD_META(homeOgImageUrl: string) {
 			name: `viewport`
 		},
 		{
-			content: '#000000',
+			content: msapplicationTileColor ?? '#000000',
 			name: 'msapplication-TileColor'
 		},
 		{
@@ -93,12 +103,12 @@ export function HEAD_META(homeOgImageUrl: string) {
 			name: 'msapplication-config'
 		},
 		{
-			content: '#fff',
+			content: themeColor ?? '#fff',
 			name: 'theme-color'
 		},
 		{
 			content: 'description',
-			name: `The homepage for the Northwest Afrobeat musical group, Extra Thick.`
+			name: description
 		},
 		{
 			content: homeOgImageUrl,

@@ -102,10 +102,10 @@ export async function getAllPostsForHome(preview: Preview) {
 	return data?.posts
 }
 
-export async function getDataForHome() {
+export async function getContactData() {
 	const data = await fetchAPI(
-		`query HomePage {
-      pages {
+		`query ContactInfo {
+      pages(where: {name: "Contact"}) {
         nodes {
           contactInfo {
             contact {
@@ -114,8 +114,22 @@ export async function getDataForHome() {
             }
             social {
               facebook
+              reverbnation
             }
           }
+        }
+      }
+    }`
+	)
+
+	return data?.pages.nodes[0].contactInfo
+}
+
+export async function getHomePageData() {
+	const data = await fetchAPI(
+		`query HomePage {
+      pages(where: {name: "Home"}) {
+        nodes {
           homePage {
             bio
             bioTitle
@@ -139,7 +153,7 @@ export async function getDataForHome() {
     }`
 	)
 
-	return data?.pages.nodes[0]
+	return data?.pages.nodes[0].homePage
 }
 
 export async function getPostAndMorePosts({
