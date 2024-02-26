@@ -8,7 +8,6 @@ module.exports = {
 	plugins: [
 		'jsx-a11y',
 		'@typescript-eslint',
-		'@trivago/prettier-plugin-sort-imports',
 		'unused-imports'
 	],
 	extends: [
@@ -32,6 +31,7 @@ module.exports = {
 	},
 	ignorePatterns: [
 		'.eslintrc.js',
+		'jest.config.js',
 		'next.config.js',
 		'postcss.config.js',
 		'.prettierrc.js',
@@ -39,7 +39,7 @@ module.exports = {
 	],
 	overrides: [
 		{
-			files: ['*.spec.*'],
+			files: ['*.spec.*', '*.test.*'],
 			rules: {
 				'react/jsx-no-literals': 'off'
 			}

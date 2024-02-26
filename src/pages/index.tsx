@@ -1,14 +1,13 @@
-import { Head } from 'partials'
+import { Container, Layout } from 'components'
 import { GetStaticProps } from 'next'
 import Image from 'next/image'
+import { Head, Icon } from 'partials'
 import { siBandcamp, siFacebook, siInstagram, siReverbnation, siTwitter } from 'simple-icons'
-import { Container, Layout } from 'components'
-import { Icon } from 'partials'
-import { getContactData, getHomePageData, getIcs } from 'utils'
-import { HomePageData, Preview } from 'types'
-import { HEAD_LINKS, HEAD_META, PLACEHOLDER_IMAGE } from 'utils/constants'
 import { type VCalendar } from 'ts-ics'
+import { HomePageData, Preview } from 'types'
+import { getContactData, getHomePageData, getIcs } from 'utils'
 import { Calendar, MusicPlayer } from 'widgets'
+import { HEAD_LINKS, HEAD_META, PLACEHOLDER_IMAGE } from 'utils/constants'
 
 export default function Index({
 	data: {
@@ -34,7 +33,6 @@ export default function Index({
 	data: HomePageData
 	preview: Preview
 }) {
-	console.log('reverbnation', reverbnation)
 	const headData = {
 		title,
 		link: HEAD_LINKS,
@@ -153,7 +151,6 @@ export const getStaticProps: GetStaticProps = async ({ preview = false }) => {
 	const [contactInfo, data] = await Promise.all([getContactData(), getHomePageData()])
 	data.calendar = JSON.stringify(await getIcs(data?.calendarId as string))
 	data.contactInfo = contactInfo
-	console.log('contactInfo', contactInfo)
 
 	return {
 		props: { data, preview },

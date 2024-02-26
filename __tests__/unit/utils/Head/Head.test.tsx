@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-sync-scripts */
-import { faker } from '@faker-js/faker'
 import { Fragment } from 'react'
+import { faker } from '@faker-js/faker'
+import { ScriptAttr } from 'partials/Head/HeadProps'
 // Constants.
 import {
 	DNS_PREFETCH,
@@ -11,18 +12,17 @@ import {
 	SCRIPT,
 	STYLE
 } from 'utils/constants'
-import { ScriptAttr } from 'partials/Head/HeadProps'
 // Components.
 import {
 	DEFAULT_SCRIPT_KEY_PREFIX,
-	LD_JSON_TYPE,
-	getLinkTags,
 	getLinks,
+	getLinkTags,
 	getMetaTags,
-	getScriptTags,
 	getScripts,
+	getScriptTags,
 	getStyles,
-	getTitleTag
+	getTitleTag,
+	LD_JSON_TYPE
 } from 'utils/Head'
 
 const domain = `${faker.internet.protocol}://${faker.internet.domainName}/`
